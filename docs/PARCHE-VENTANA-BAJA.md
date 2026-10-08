@@ -19,13 +19,14 @@ Sin el parche: el exe no se puede mapear → el runtime no arranca → **vuelta 
 
 | Requisito | Valor |
 |---|---|
-| **Atmosphere** | **1.11.2 OFICIAL** — revisión `5388824be146a89619e8d641acd64599cf1c5f62` (la del paquete oficial de Atmosphere). **Un CFW empaquetado o modificado (packs «all-in-one», MOD…) NO sirve**: el kernel parcheado no encaja y la consola se queda en **pantalla negra** |
+| **Atmosphere** | **1.11.2**, revisión `5388824be146a89619e8d641acd64599cf1c5f62`. **El parche es un kernel: va por versión exacta de Atmosphere y de firmware.** Si tu consola está en otra versión (AMS distinto, firmware más nuevo) puede **no encajar** → pantalla negra (ver aviso de abajo) |
 | `atmosphere/mesosphere.bin` | 675.840 bytes · md5 `2e1d04d6ea1a…` |
 | `atmosphere/kips/autorun-loader.kip` | 158.432 bytes · md5 `d6cdc924bf7b…` |
 
 > **Si al arrancar te queda la pantalla negra** (y solo ves Hekate/imagen al inicio):
-> es que tu Atmosphere no es el 1.11.2 oficial. **Apaga, borra solo los dos ficheros que
-> acabas de copiar y arranca normal** — vuelve todo a como estaba.
+> el parche no encaja con tu versión. **Apaga, borra solo los dos ficheros que
+> acabas de copiar y arranca normal** — vuelve todo a como estaba. Si quieres el parche
+> para tu versión, avisa: se reconstruye para esas versiones exactas.
 
 Los dos ficheros están en el Release de 07z, en `parche-ventana-baja/` (`README.txt` y
 `LICENSE.Atmosphere.txt` incluidos).

@@ -73,7 +73,7 @@ Hay cosas que estamos probando y que **todavía no podemos prometer**. Las dejam
 
 | # | Necesitas | Detalle |
 |---|-----------|---------|
-| 1 | **Nintendo Switch** con **custom firmware** | Atmosphere **1.11.2 OFICIAL** (revisión `5388824…`) con sigpatches — vale `sysMMC` o `emuMMC`. **Con un CFW empaquetado/modificado no encaja** (ver nota de abajo) |
+| 1 | **Nintendo Switch** con **custom firmware** | Atmosphere **1.11.2 OFICIAL** (revisión `5388824…`) con sigpatches — vale `sysMMC` o `emuMMC`. **El parche de ventana baja es un kernel: va por versión exacta de Atmosphere Y de firmware** (ver nota de abajo) |
 | 2 | **Tu propia copia de FIFA 07 de PC** | `fifa07.exe` + sus datos. **No se incluye** |
 | 3 | **Tarjeta SD** con espacio | ~60 MB del port **+** lo que ocupe tu copia del juego (2-4 GB) |
 | 4 | **Un instalador de NSP** en la consola | DBI, Goldleaf, Tinfoil, Awoo Installer… |
@@ -82,9 +82,10 @@ Hay cosas que estamos probando y que **todavía no podemos prometer**. Las dejam
 
 > ⚙️ **Lo único que SÍ hay que añadir**: el **parche de «ventana baja»** de Autorun
 > (`atmosphere/mesosphere.bin` + `atmosphere/kips/autorun-loader.kip`) — **sin él el juego no
-> arranca**: pulsás Jugar y te devuelve al menú. Es para **Atmosphere 1.11.2 OFICIAL**: con un
-> pack/repack modificado (AIO, MOD…) **la consola se queda en pantalla negra** al añadirlo
-> (se quitan los dos ficheros y vuelve a arrancar). Cómo se instala:
+> arranca**: pulsás Jugar y te devuelve al menú. Es un **kernel**, así que va por **versión
+> exacta**: este es para **Atmosphere 1.11.2 (revisión `5388824…`)**. Si tu consola está en
+> otra versión (AMS distinto, firmware más nuevo) puede **no encajar y quedarse en pantalla
+> negra** al añadirlo — se quitan los dos ficheros y arranca normal. Cómo se instala:
 > [`docs/PARCHE-VENTANA-BAJA.md`](docs/PARCHE-VENTANA-BAJA.md).
 >
 > ✅ **Lo que NO hace falta**: ni particiones nuevas, ni overclock, ni pasar por ningún
@@ -203,9 +204,9 @@ No. Para jugar hay que lanzar 07z **desde el icono del HOME** (el NSP). Desde el
 (`atmosphere/mesosphere.bin` y `atmosphere/kips/autorun-loader.kip`) que van en el Release, en
 `parche-ventana-baja/`. FIFA 07 es un ejecutable con direcciones fijas (`0x400000`): sin ese
 parche el kernel no le da la ventana baja y el juego **no arranca** (pulsás Jugar y volvés al
-menú). Es para **Atmosphere 1.11.2 OFICIAL**; con un CFW empaquetado o modificado (packs
-«all-in-one», MOD…) el kernel parcheado **no encaja** y la consola se queda en **pantalla
-negra** — se quitan los dos ficheros y vuelve a arrancar. Guía:
+menú). Es un **kernel**, así que va por **versión exacta**: este es para Atmosphere 1.11.2
+(revisión `5388824…`). Si tu consola está en otra versión puede no encajar y quedarse en
+**pantalla negra** — se quitan los dos ficheros y vuelve a arrancar. Guía:
 [`docs/PARCHE-VENTANA-BAJA.md`](docs/PARCHE-VENTANA-BAJA.md). No hace falta nada más: ni
 particiones nuevas, ni overclock, ni el asistente de setup de Wine-NX.
 
