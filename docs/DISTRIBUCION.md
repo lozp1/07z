@@ -71,7 +71,7 @@ Que un usuario final:
 
 1. descargue **una sola carpeta** llamada `fifa07` y la pegue en `sdmc:/switch/`,
 2. instale **un** NSP,
-3. pulse el icono en el HOME y **vea su frontend (marca 07Z)**, y desde ahi
+3. pulse el icono en el HOME y **vea su frontend (marca 07z)**, y desde ahi
    arranque el juego.
 
 Durante todo el flujo **Wine no se ve nunca**: ni catalogo de Autorun, ni
@@ -84,7 +84,7 @@ pantallas de Wine, ni ningun menu intermedio. Se siente como un juego nativo.
 ```
 sdmc:/switch/fifa07/                 <- LA UNICA CARPETA PORTABLE
 ├── wine-nx-runtime.nro              # runtime Wine-NX (raiz de Wine = esta carpeta)
-├── 07z.nro                       # EL FRONTEND (marca 07Z).  <- el NRO del frontend va AQUI
+├── 07z.nro                       # EL FRONTEND (marca 07z).  <- el NRO del frontend va AQUI
 ├── config/                          # settings.json, keys.txt, ...
 │   └── settings.json
 ├── drive_c/                         # el prefijo de Wine
@@ -131,8 +131,8 @@ Asi el **mismo** `07z.nro` sirve para las dos disposiciones: hoy (runtime en
 HOME (icono "07z")
         │  NSP forwarder (AddressSpaceType=3, 39-bit no-alias, 4 cores)
         ▼
-07z.nro  (frontend, 07Z)      <-- modo APLICACION (39-bit, ventana baja libre).
-        │                              Marca 07Z visible.
+07z.nro  (frontend, 07z)      <-- modo APLICACION (39-bit, ventana baja libre).
+        │                              Marca 07z visible.
         │  envSetNextLoad(runtime, "runtime" "fifa07.exe")
         ▼
 wine-nx-runtime.nro  +  fifa07.exe   <-- el runtime entra DIRECTO al juego:
@@ -225,7 +225,7 @@ no mostrar nada de Wine): muestra un aviso "Abre desde el menu de inicio".
    frontend (pantalla Configuracion) o editando esos ficheros.
 4. **Instala el NSP** `07z-forwarder.nsp` con tu instalador habitual.
 5. En el **HOME** aparece el icono **07z**. Pulsalo.
-6. Se abre **tu frontend (07Z)**; pulsa **Jugar**. El juego arranca **sin ver
+6. Se abre **tu frontend (07z)**; pulsa **Jugar**. El juego arranca **sin ver
    nada de Wine**. Al salir del juego vuelves al HOME.
 
 > Regla de oro: **para jugar, siempre desde el icono del HOME**. Abrirlo desde el
@@ -508,7 +508,7 @@ Copia anterior (lanzaba el runtime directo): `*.bak-wine-direct`.
 
 **Riesgos**
 
-- Si se instala el frontend fuera de `fifa07` (p. ej. en `switch/FifaFZ/`), el
+- Si se instala el frontend fuera de `fifa07` (p. ej. en `switch/07z/`), el
   icono del HOME no lo encontrara: `nextNroPath` es fijo a `switch/fifa07/07z.nro`.
 - ~~Doble raiz transitoria~~ **RESUELTO**: el runtime ya tiene la raiz `fifa07`
   compilada dentro, asi que la carpeta `fifa07` es autosuficiente y

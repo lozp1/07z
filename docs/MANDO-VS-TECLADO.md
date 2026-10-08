@@ -1,5 +1,10 @@
 # Mando vs. teclado en FIFA 07 NX
 
+> **Nota de vigencia:** documento de la etapa previa del port. La raíz de la SD es
+> ahora **`sdmc:/switch/fifa07`** (aquí se ven rutas `sdmc:/switch/wine`, la raíz
+> antigua). El modo final en uso es **teclado (`input-mode=2`)** + shim `DINPUT.dll`;
+> la guía vigente es `docs/INSTALACION-07z.md`.
+
 Este documento explica los **dos caminos de entrada** que soporta el runtime
 Wine-NX para FIFA 07, cómo alternar entre ellos sin doble entrada y qué se gana y
 se pierde con cada uno. La idea es que el usuario pueda volver a la vía de mando

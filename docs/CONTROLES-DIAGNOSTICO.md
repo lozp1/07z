@@ -1,5 +1,10 @@
 # Diagnóstico: el stick izquierdo cambia las tácticas en FIFA 07
 
+> **Nota de vigencia:** este diagnóstico es de una etapa previa del port. La raíz de
+> la SD es ahora **`sdmc:/switch/fifa07`** (aquí siguen apareciendo rutas
+> `sdmc:/switch/wine`, que era la raíz antigua). La guía vigente es
+> `docs/INSTALACION-07z.md` y el mapa de mandos final, `docs/MANDOS-DIAGNOSTICO.md`.
+
 Estado: **causa raíz encontrada, corregida y compilada**. Falta un solo paso del
 usuario: copiar el `DINPUT.dll` corregido a la SD (no se ha tocado la SD desde
 esta sesión).

@@ -1,5 +1,10 @@
 # Estado del overclock en la SD (FIFA 07 NX)
 
+> **Nota (estado final, 2026-10-07):** el port **NO necesita overclock**. El usuario
+> aplica el suyo por su cuenta si quiere (p. ej. con **UltraHand**), y el port va
+> bien sin él. Este documento es el **diagnóstico** de lo que había en la SD ese
+> día (sys-clk sin kip de OC); se conserva como referencia, no como requisito.
+
 Revisión hecha **solo leyendo** la tarjeta (`D:\`), sin aplicar cambios.
 Fecha de la revisión: 2026-10-07.
 
@@ -112,7 +117,7 @@ handheld_mem=1600
 1. **Que sys-clk vea el title id correcto.** El juego se lanza desde el icono del
    HOME → NSP forwarder **07z** (title id **`0x051D3B463F87C000`**, construido el
    2026-10-07, `local/forwarder-build-fifa07/hacbrewpack_nsp/051d3b463f87c000.nsp`,
-   idéntico en tamaño al `/d/FIFA-FZ-forwarder.nsp` de la SD) → `FifaFZ.nro` →
+   idéntico en tamaño al `/d/07z-forwarder.nsp` de la SD) → `07z.nro` →
    `wine-nx-runtime.nro` → `fifa07.exe`. Todo el proceso corre bajo ese title id.
    **Ese id NO está en `config.ini`.**
 
