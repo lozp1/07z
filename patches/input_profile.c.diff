@@ -1,0 +1,83 @@
+--- /c/Projects/ports/autorun-src/horizon-wine/source/a/input_profile.c	2026-10-06 20:54:11.010616800 -0600
++++ b/input_profile.c	2026-10-06 20:54:42.833504000 -0600
+@@ -63,6 +63,8 @@
+     p->mode = INPUT_CONTROLLER;
+     p->deadzone[0] = p->deadzone[1] = 5;
+     p->keyboard_auto = !!keyboard_auto;
++    p->joycon_hold = 1;      /* a lone half used sideways is the default */
++    p->joycon_rotate = 0;    /* the console's own hold type does the roll */
+     for (unsigned int i = 0; i < INPUT_SOURCE_COUNT; i++)
+     {
+         if (i < INPUT_PAD_TARGET_COUNT) p->pad[i] = (struct input_binding){ { i + 1 }, 1 };
+@@ -141,6 +143,11 @@
+     p->deadzone[0] = setting( kv, "left-deadzone", p->deadzone[0], 0, 25 );
+     p->deadzone[1] = setting( kv, "right-deadzone", p->deadzone[1], 0, 25 );
+     p->keyboard_auto = setting( kv, "keyboard-auto", p->keyboard_auto, 0, 1 );
++    /* Controller-side switches: the hold type the halves are read with, and an
++     * extra stick roll for a lone half.  In the keys file so the card can flip
++     * either without a rebuild. */
++    p->joycon_hold = setting( kv, "joycon-hold", p->joycon_hold, 0, 1 );
++    p->joycon_rotate = setting( kv, "joycon-rotate", p->joycon_rotate, -180, 180 );
+ }
+ 
+ int input_profile_global( const char *root, int keyboard_auto, struct input_profile *profile,
+@@ -172,6 +179,59 @@
+     return 1;
+ }
+ 
++/* Player 2's default keys.  FIFA 07's keyboard map is player 1's, so the second
++ * set stays clear of it: movement on the numeric keypad and the action keys on
++ * its corner, the classic two-players-one-keyboard split.  A game that binds a
++ * single keyboard player still gets a live, self-consistent second controller,
++ * and <program>.player2.keys.txt overrides any line of this. */
++void input_profile_defaults_player2( struct input_profile *p )
++{
++    static const unsigned short keys[] =
++    {
++        0x65, 0x60, 0x69, 0x67, 0x6b, 0x6d, 0x6a, 0x6f,   /* A B X Y / L R ZL ZR */
++        0x1b, 0x0d, 0x6e, 0x20,                           /* PLUS MINUS STICKL STICKR */
++        0x68, 0x62, 0x64, 0x66,                           /* UP DOWN LEFT RIGHT */
++        0x68, 0x62, 0x64, 0x66,                           /* LUP LDOWN LLEFT LRIGHT */
++        0x68, 0x62, 0x64, 0x66,                           /* RUP RDOWN RLEFT RRIGHT */
++    };
++    memset( p, 0, sizeof(*p) );
++    p->mode = INPUT_CONTROLLER;
++    p->deadzone[0] = p->deadzone[1] = 5;
++    p->joycon_hold = 1;
++    p->joycon_rotate = 0;
++    for (unsigned int i = 0; i < INPUT_SOURCE_COUNT; i++)
++    {
++        if (i < INPUT_PAD_TARGET_COUNT) p->pad[i] = (struct input_binding){ { i + 1 }, 1 };
++        if (i < sizeof(keys) / sizeof(keys[0])) p->keys[i] = (struct input_binding){ { keys[i] }, 1 };
++    }
++}
++
++/* Player 2's map, layered over its defaults exactly as player 1's is layered
++ * over its own, from the player-2 file names.  There is no "no file" error: a
++ * card with only player 1's keys still gets a usable second controller. */
++int input_profile_program_player2( const char *root, const char *program, int keyboard_auto,
++                                   struct input_profile *profile, struct launcher_kv *editable,
++                                   char *path, size_t size )
++{
++    struct launcher_kv extra;
++    size_t len = program ? strlen( program ) : 0;
++
++    (void)keyboard_auto;
++    input_profile_defaults_player2( profile );
++    memset( editable, 0, sizeof(*editable) );
++    if ((size_t)snprintf( path, size, "%s/keys2.txt", root ) < size && launcher_kv_load( &extra, path ))
++        input_profile_apply( profile, &extra );
++    if ((size_t)snprintf( path, size, "%s/config/keys2.txt", root ) < size && launcher_kv_load( editable, path ))
++        input_profile_apply( profile, editable );
++    if (len > 4 && !strcasecmp( program + len - 4, ".exe" ))
++    {
++        if ((size_t)snprintf( path, size, "%.*s.player2.keys.txt", (int)len - 4, program ) < size &&
++            launcher_kv_load( &extra, path ))
++            input_profile_apply( profile, &extra );
++    }
++    return 1;
++}
++
+ int input_profile_save( const struct launcher_kv *kv, const char *path )
+ {
+     char parent[768], *slash;

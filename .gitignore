@@ -1,0 +1,101 @@
+# =============================================================================
+#  07z — .gitignore
+#
+#  ESTE REPOSITORIO NO DISTRIBUYE EL JUEGO.
+#  Ningun fichero de FIFA 07 ni de Electronic Arts (EA) debe entrar aqui NUNCA.
+#  Las reglas de abajo existen precisamente para garantizar que eso no ocurra.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1) EL JUEGO (propiedad de EA). NUNCA se sube.
+# -----------------------------------------------------------------------------
+# el ejecutable del juego, en cualquier carpeta
+fifa07.exe
+FIFA07.exe
+**/fifa07.exe
+**/FIFA07.exe
+FIFA*.exe
+# cualquier binario de Windows (el juego es .exe y trae .dll propias)
+*.exe
+*.EXE
+*.dll
+*.ocx
+*.drv
+*.cpl
+*.scr
+
+# carpetas tipicas de una copia instalada del juego
+FIFA 07/
+FIFA07/
+**/FIFA 07/**
+**/FIFA07/**
+drive_c/
+**/drive_c/**
+
+# -----------------------------------------------------------------------------
+# 2) DATOS Y FORMATOS DEL JUEGO (EA / FIFA 07). NUNCA se suben.
+# -----------------------------------------------------------------------------
+*.big
+*.BIG
+*.viv
+*.VIV
+*.fsh
+*.FSH
+*.ssh
+*.SSH
+*.tm
+*.rmt
+*.rfe
+*.smk
+*.str
+*.STR
+*.dbdata
+*.DAT
+*.fx
+*.gfx
+
+# -----------------------------------------------------------------------------
+# 3) INSTALADORES / VOLCADOS DE LA COPIA DEL USUARIO. NUNCA se suben.
+# -----------------------------------------------------------------------------
+*.iso
+*.ISO
+*.bin
+*.img
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tar.xz
+
+# -----------------------------------------------------------------------------
+# 4) CLAVES DE CONSOLA. NUNCA se suben.
+# -----------------------------------------------------------------------------
+prod.keys
+*.keys
+keys.txt
+keys2.txt
+
+# -----------------------------------------------------------------------------
+# 5) RUIDO DE COMPILACION / USUARIO / TEMPORALES
+# -----------------------------------------------------------------------------
+*.elf
+*.lst
+*.map
+*.nacp
+*.log
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -----------------------------------------------------------------------------
+# 6) LO QUE SI SE DISTRIBUYE (por si alguna regla amplia lo pillara por error).
+#    El NSP forwarder (install/) va en el repo.
+#    Los .nro (frontend 07z y runtime) NO van en git: se publican como
+#    "Release assets"; pero si se decide meterlos, estas lineas lo permiten.
+# -----------------------------------------------------------------------------
+!install/*.nsp
+!install/*.nro
+!07z-forwarder.nsp

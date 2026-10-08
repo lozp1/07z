@@ -1,0 +1,232 @@
+--- /c/Projects/ports/autorun-src/horizon-wine/source/a/runtime.c	2026-10-06 20:54:10.948084300 -0600
++++ b/runtime.c	2026-10-06 20:56:06.226194200 -0600
+@@ -520,6 +520,7 @@
+  * programs to open it themselves through NtUserShowSoftwareKeyboard. */
+ int wine_nx_swkbd_auto_enabled = 1;
+ struct input_profile wine_nx_input_profile;
++struct input_profile wine_nx_input_profile2;
+ uint64_t wine_nx_input_swallowed;
+ 
+ /***********************************************************************
+@@ -540,16 +541,18 @@
+ static pthread_mutex_t wine_nx_pointer_mutex = PTHREAD_MUTEX_INITIALIZER;
+ static struct pointer_cursor wine_nx_pointer =
+     { .x = WINE_NX_FB_W / 2, .y = WINE_NX_FB_H / 2, .width = WINE_NX_FB_W, .height = WINE_NX_FB_H };
+-/* The runtime reads three input sources at once: the console's own controls
+- * (handheld) and the two Joy-Con, which the system hands out as player 1 and
+- * player 2 once they are detached.  wine_nx_pad is the merged view the poll
+- * reads; the per-source states exist so the sticks of both halves can be
+- * merged by magnitude instead of one half's idle drift masking the other. */
+-#define WINE_NX_PAD_SOURCE_COUNT 3
+-static PadState wine_nx_pad;
+-static PadState wine_nx_pad_source[WINE_NX_PAD_SOURCE_COUNT];
+-static const HidNpadIdType wine_nx_pad_source_id[WINE_NX_PAD_SOURCE_COUNT] =
+-    { HidNpadIdType_Handheld, HidNpadIdType_No1, HidNpadIdType_No2 };
++/* The runtime reads input for two players, each from the pad the system gives
++ * that player.  Player 1 reads the console itself (handheld) plus player 1's
++ * pad: a Joy-Con pair left in the grip arrives there as one dual-mode pad, so
++ * the grip is still a single player exactly as before.  Player 2 reads player
++ * 2's pad - where the system puts the right half once a detached pair is split
++ * - and emits its own key map.  Nothing is merged across players. */
++static PadState wine_nx_pad;    /* player 1: Handheld + No1 */
++static PadState wine_nx_pad2;   /* player 2: No2 */
++/* Hold type handed to the console, from joycon-hold in the keys file (default
++ * horizontal, what a half used sideways expects).  A variable so the recovery
++ * screen, which configures before the profile is read, still gets a sane one. */
++static int wine_nx_joycon_hold = HidNpadJoyHoldType_Horizontal;
+ static u64 wine_nx_pointer_tick;
+ static int wine_nx_pointer_ready;
+ /* What the polls saw since the last wine_nx_input_take(). */
+@@ -858,26 +861,45 @@
+     padConfigureInput( 2, HidNpadStyleSet_NpadStandard );
+     hidSetNpadJoyAssignmentModeSingleByDefault( HidNpadIdType_No1 );
+     hidSetNpadJoyAssignmentModeSingleByDefault( HidNpadIdType_No2 );
+-    hidSetNpadJoyHoldType( HidNpadJoyHoldType_Horizontal );
++    hidSetNpadJoyHoldType( wine_nx_joycon_hold ? HidNpadJoyHoldType_Horizontal :
++                                                 HidNpadJoyHoldType_Vertical );
+ }
+ 
+-/* How many input sources answered the last poll.  A Joy-Con pair in the grip
+- * is one source (a single dual-mode Npad on player 1); detached, it is two -
+- * which is when the per-source sticks have to be weighed against each other. */
+-static int wine_nx_pad_source_count(void)
+-{
+-    return padIsNpadActive( &wine_nx_pad, HidNpadIdType_Handheld ) +
+-           padIsNpadActive( &wine_nx_pad, HidNpadIdType_No1 ) +
+-           padIsNpadActive( &wine_nx_pad, HidNpadIdType_No2 );
++/* A detached half's only shoulders are its rail buttons (SL/SR); the console
++ * itself offers them as that half's L/R once it is held sideways. */
++static u64 wine_nx_pad_shoulders( u64 held )
++{
++    if (held & HidNpadButton_AnySL) held |= HidNpadButton_L;
++    if (held & HidNpadButton_AnySR) held |= HidNpadButton_R;
++    return held;
++}
++
++/* Roll a detached half's stick to match how it is held: sideways, a Joy-Con
++ * sits ninety degrees from its rail position, so the axes swap and one flips.
++ * A pair in the grip is a dual-mode pad and is left alone, so putting the two
++ * halves back recovers the normal layout with no state to reset.  joycon-rotate
++ * in the keys file turns the roll on (and takes its sign) if a console needs it
++ * beyond its own hold type. */
++static void wine_nx_pad_orient( struct input_pad *raw, u32 style_set, int right )
++{
++    int roll = wine_nx_input_profile.joycon_rotate, x, y;
++
++    if (!roll || !(style_set & (HidNpadStyleTag_NpadJoyLeft | HidNpadStyleTag_NpadJoyRight))) return;
++    if (right) roll = -roll;
++    x = raw->axis[0];
++    y = raw->axis[1];
++    if (roll > 0) { raw->axis[0] = -y; raw->axis[1] = x; }
++    else          { raw->axis[0] = y;  raw->axis[1] = -x; }
+ }
+ 
+ int wine_nx_pointer_poll( int *x, int *y, unsigned int *buttons )
+ {
+     HidTouchScreenState touch = {0};
+-    struct input_pad raw = {0};
++    struct input_pad raw = {0}, raw2 = {0};
+     struct input_output output = {0};
+     const struct input_profile *profile = &wine_nx_input_profile;
+-    u64 now, held, all_held, elapsed;
++    const struct input_profile *profile2 = &wine_nx_input_profile2;
++    u64 now, held, all_held, held1, held2, elapsed;
+     int moved = 0, keyboard = 0, on_keyboard = 0, leave = 0, emulate;
+     static int osk_combo;
+     static u64 swallowed, quit_since, wheel_next;
+@@ -888,52 +910,40 @@
+     {
+         hidInitializeTouchScreen();
+         wine_nx_pad_configure();
+-        padInitialize( &wine_nx_pad, HidNpadIdType_Handheld, HidNpadIdType_No1, HidNpadIdType_No2 );
+-        for (unsigned int i = 0; i < WINE_NX_PAD_SOURCE_COUNT; i++)
+-            padInitialize( &wine_nx_pad_source[i], wine_nx_pad_source_id[i] );
+-        log_line( "[NXINPUT] pads: handheld + No1 + No2 (two Joy-Con)" );
++        padInitialize( &wine_nx_pad, HidNpadIdType_Handheld, HidNpadIdType_No1 );
++        padInitialize( &wine_nx_pad2, HidNpadIdType_No2 );
++        log_line( "[NXINPUT] pads: player 1 = handheld + No1, player 2 = No2" );
+         wine_nx_pointer_tick = armGetSystemTick();
+         wine_nx_pointer_ready = 1;
+     }
+     padUpdate( &wine_nx_pad );
++    padUpdate( &wine_nx_pad2 );
+     now = armGetSystemTick();
+     elapsed = armTicksToNs( now - wine_nx_pointer_tick );
+     wine_nx_pointer_tick = now;
+-    all_held = padIsConnected( &wine_nx_pad ) ? padGetButtons( &wine_nx_pad ) : 0;
+-    /* A detached half sends its rail buttons as SL/SR; the console itself
+-     * treats them as that half's shoulders once it is held horizontally. */
+-    if (all_held & HidNpadButton_AnySL) all_held |= HidNpadButton_L;
+-    if (all_held & HidNpadButton_AnySR) all_held |= HidNpadButton_R;
++    /* Each player's pad is read on its own; nothing is merged between them.
++     * The menu, the on-screen keyboard and the quit chord answer either pad. */
++    held1 = padIsConnected( &wine_nx_pad ) ? wine_nx_pad_shoulders( padGetButtons( &wine_nx_pad ) ) : 0;
++    held2 = padIsConnected( &wine_nx_pad2 ) ? wine_nx_pad_shoulders( padGetButtons( &wine_nx_pad2 ) ) : 0;
++    all_held = held1 | held2;
+     held = all_held;
++    raw = (struct input_pad){ held1, { 0, 0, 0, 0 } };
++    raw2 = (struct input_pad){ held2, { 0, 0, 0, 0 } };
+     if (padIsConnected( &wine_nx_pad ))
+     {
+         HidAnalogStickState left = padGetStickPos( &wine_nx_pad, 0 ), right = padGetStickPos( &wine_nx_pad, 1 );
+-        /* With the two halves of a detached pair each sending its own stick,
+-         * keep the larger deflection: whichever half is pushed wins and one
+-         * half at rest cannot mask the other.  The extra states are read only
+-         * when more than one source feeds the runtime, so a single controller
+-         * - the grip included - reads exactly as before. */
+-        if (wine_nx_pad_source_count() > 1)
+-        {
+-            left = right = (HidAnalogStickState){0, 0};
+-            for (unsigned int i = 0; i < WINE_NX_PAD_SOURCE_COUNT; i++)
+-            {
+-                HidAnalogStickState l, r;
+-                padUpdate( &wine_nx_pad_source[i] );
+-                if (!padIsConnected( &wine_nx_pad_source[i] )) continue;
+-                l = padGetStickPos( &wine_nx_pad_source[i], 0 );
+-                r = padGetStickPos( &wine_nx_pad_source[i], 1 );
+-                if (abs( l.x ) + abs( l.y ) > abs( left.x ) + abs( left.y )) left = l;
+-                if (abs( r.x ) + abs( r.y ) > abs( right.x ) + abs( right.y )) right = r;
+-            }
+-        }
+-        /* A right half alone reports its stick on the right; let it drive the
+-         * movement stick too so either half is playable on its own.  Gated on
+-         * a single-Joy-Con style, so a grip's right stick is left alone. */
+-        if (!left.x && !left.y && (right.x || right.y) &&
+-            (padGetStyleSet( &wine_nx_pad ) & (HidNpadStyleTag_NpadJoyLeft | HidNpadStyleTag_NpadJoyRight)))
+-            left = right;
+-        raw = (struct input_pad){ held, { left.x, left.y, right.x, right.y } };
++        raw.axis[0] = left.x; raw.axis[1] = left.y; raw.axis[2] = right.x; raw.axis[3] = right.y;
++        wine_nx_pad_orient( &raw, padGetStyleSet( &wine_nx_pad ), 0 );
++    }
++    if (padIsConnected( &wine_nx_pad2 ))
++    {
++        HidAnalogStickState left = padGetStickPos( &wine_nx_pad2, 0 ), right = padGetStickPos( &wine_nx_pad2, 1 );
++        /* A lone right half is a single Joy-Con: its one stick lands on
++         * whichever axis the console picks, so drive the movement stick from it
++         * either way, and keep its own axis for RUP..RRIGHT bindings. */
++        if (!left.x && !left.y) left = right;
++        raw2.axis[0] = left.x; raw2.axis[1] = left.y; raw2.axis[2] = right.x; raw2.axis[3] = right.y;
++        wine_nx_pad_orient( &raw2, padGetStyleSet( &wine_nx_pad2 ), 1 );
+     }
+     {
+         const u64 osk = HidNpadButton_Minus | HidNpadButton_StickR;
+@@ -953,7 +963,8 @@
+         }
+         else swallowed &= held;
+         __atomic_store_n( &wine_nx_input_swallowed, swallowed, __ATOMIC_RELAXED );
+-        raw.buttons = held & ~swallowed;
++        raw.buttons = held1 & ~swallowed;
++        raw2.buttons = held2 & ~swallowed;
+         static unsigned int drawn_generation;
+         unsigned int generation = wine_nx_osk_generation();
+         if (generation != drawn_generation)
+@@ -974,13 +985,20 @@
+     }
+     if (emulate)
+     {
+-        struct input_output mapped;
+-        input_map_keys( profile, &raw, &mapped );
+-        memcpy( output.keys, mapped.keys, sizeof(output.keys) );
+-        output.buttons |= mapped.buttons;
+-        output.wheels = mapped.wheels;
+-        output.mouse_x = mapped.mouse_x;
+-        output.mouse_y = mapped.mouse_y;
++        struct input_output mapped1, mapped2;
++
++        /* Player 1's map and player 2's map over each player's own pad; the
++         * guest sees one keyboard, and the two sets of scan codes reach it
++         * together without either map ever reading the other pad. */
++        input_map_keys( profile, &raw, &mapped1 );
++        input_map_keys( profile2, &raw2, &mapped2 );
++        for (unsigned int i = 0; i < INPUT_KEY_WORDS; i++) output.keys[i] = mapped1.keys[i] | mapped2.keys[i];
++        output.buttons = mapped1.buttons | mapped2.buttons;
++        output.wheels = mapped1.wheels | mapped2.wheels;
++        output.mouse_x = mapped1.mouse_x + mapped2.mouse_x;
++        output.mouse_y = mapped1.mouse_y + mapped2.mouse_y;
++        output.mouse_x = output.mouse_x < -32768 ? -32768 : output.mouse_x > 32767 ? 32767 : output.mouse_x;
++        output.mouse_y = output.mouse_y < -32768 ? -32768 : output.mouse_y > 32767 ? 32767 : output.mouse_y;
+         moved |= pointer_cursor_step( &wine_nx_pointer, output.mouse_x, output.mouse_y, elapsed );
+     }
+     input_key_edges_update( &runtime_key_edges, output.keys );
+@@ -1815,7 +1833,7 @@
+      * GetCommandLineA/W. Otherwise use the quoted executable path. */
+     {
+         char input_path[768];
+-        struct launcher_kv kv;
++        struct launcher_kv kv, kv2;
+         int loaded = target[1] == ':' ?
+             input_profile_global( RUNTIME_DIR, wine_nx_swkbd_auto_enabled, &wine_nx_input_profile,
+                                   &kv, input_path, sizeof(input_path) ) :
+@@ -1823,6 +1841,12 @@
+                                    &wine_nx_input_profile, &kv, input_path, sizeof(input_path) );
+         if (!loaded) log_line( "[INPUT] could not read controller settings" );
+         wine_nx_swkbd_auto_enabled = wine_nx_input_profile.keyboard_auto;
++        /* Player 2's map, from keys2.txt / config/keys2.txt / the program's
++         * .player2.keys.txt.  Its defaults stand when no such file is present,
++         * and the hold type comes from player 1's file too. */
++        input_profile_program_player2( RUNTIME_DIR, target, wine_nx_swkbd_auto_enabled,
++                                       &wine_nx_input_profile2, &kv2, input_path, sizeof(input_path) );
++        wine_nx_joycon_hold = wine_nx_input_profile.joycon_hold;
+     }
+     /* Its own Box64 options, read when its first x86 code runs: SPEED2.box64.txt. */
+     {

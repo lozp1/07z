@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>07z — FIFA 07 en Nintendo Switch (no oficial)</title>
+<meta name="description" content="07z: frontend homebrew y port no oficial para jugar a tu propia copia de FIFA 07 de PC en Nintendo Switch. No incluye el juego." />
+<link rel="icon" href="assets/icon-256.png" />
+<meta property="og:title" content="07z — FIFA 07 en Nintendo Switch" />
+<meta property="og:description" content="Port no oficial. No incluye el juego: aporta tu propia copia de FIFA 07 de PC." />
+<meta property="og:image" content="assets/icon-256.png" />
+<style>
+  :root{
+    --bg-base:#0B1120; --bg-surface:#060913; --bg-card:#0E1526; --bg-dock:#07111F;
+    --border-subtle:#1E293B; --border-accent:#26344A;
+    --text-primary:#F8FAFC; --text-secondary:#94A3B8; --text-muted:#64748B;
+    --accent-blue:#1D4ED8; --accent-blue-h:#2563EB; --accent-blue-b:#3B82F6;
+    --accent-cyan:#38BDF8; --accent-green:#10E761; --accent-amber:#F59E0B;
+    --radius-card:14px; --radius-btn:10px;
+    --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--font); color:var(--text-primary);
+    background:
+      radial-gradient(1100px 600px at 80% -10%, rgba(56,189,248,.14), transparent 60%),
+      radial-gradient(900px 500px at 10% 0%, rgba(29,78,216,.18), transparent 55%),
+      var(--bg-base);
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent-cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header.hero{text-align:center;padding:56px 0 28px}
+  .logo{
+    width:132px;height:132px;border-radius:26px;object-fit:cover;
+    border:1px solid var(--border-accent);
+    box-shadow:0 18px 50px rgba(0,0,0,.55), 0 0 0 6px rgba(29,78,216,.10);
+    background:var(--bg-card);
+  }
+  .hero h1{
+    font-size:clamp(2.6rem,7vw,4.2rem);margin:18px 0 4px;letter-spacing:-.02em;
+    background:linear-gradient(90deg,#fff,var(--accent-cyan) 55%,var(--accent-blue-b));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero .sub{color:var(--text-secondary);font-size:1.12rem;margin:0 auto;max-width:620px}
+  .badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:26px 0 8px}
+  .badges img{height:30px}
+  .notice{
+    display:flex;gap:14px;align-items:flex-start;
+    background:linear-gradient(180deg,rgba(245,158,11,.12),rgba(245,158,11,.05));
+    border:1px solid rgba(245,158,11,.42);border-radius:var(--radius-card);
+    padding:18px 20px;margin:34px 0;text-align:left;
+  }
+  .notice .ico{font-size:1.7rem;line-height:1}
+  .notice strong{color:var(--accent-amber)}
+  .notice p{margin:0;color:#FDE68A;font-size:.98rem}
+  section{margin:44px 0}
+  h2{font-size:1.5rem;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+  h2 .e{font-size:1.35rem}
+  p{color:var(--text-secondary)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px}
+  .card{
+    background:var(--bg-card);border:1px solid var(--border-subtle);
+    border-radius:var(--radius-card);padding:18px 18px;
+  }
+  .card h3{margin:0 0 6px;font-size:1.02rem;color:var(--text-primary)}
+  .card p{margin:0;font-size:.93rem}
+  ul.feat{list-style:none;padding:0;margin:8px 0 0}
+  ul.feat li{padding:7px 0 7px 30px;position:relative;color:var(--text-secondary);border-bottom:1px solid var(--border-subtle)}
+  ul.feat li:last-child{border-bottom:0}
+  ul.feat li::before{content:"✔";position:absolute;left:4px;color:var(--accent-green);font-weight:700}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:8px 0 4px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:14px 24px;border-radius:var(--radius-btn);font-weight:700;font-size:1rem;
+    border:1px solid transparent;transition:transform .12s ease, background .12s ease;
+  }
+  .btn:hover{transform:translateY(-2px);text-decoration:none}
+  .btn-primary{background:var(--accent-blue);color:#fff;box-shadow:0 10px 28px rgba(29,78,216,.4)}
+  .btn-primary:hover{background:var(--accent-blue-h)}
+  .btn-ghost{background:var(--bg-card);color:var(--text-primary);border-color:var(--border-accent)}
+  .btn-ghost:hover{background:var(--bg-dock)}
+  .btn-paypal{background:#0070BA;color:#fff}
+  .btn-paypal:hover{background:#005c99}
+  .credits{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+  .credits .card{text-align:center}
+  .credits a{color:var(--text-primary);font-weight:600}
+  .credits small{color:var(--text-muted)}
+  pre.code{
+    background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;
+    padding:16px 18px;overflow:auto;color:#cbd5e1;font-size:.86rem;line-height:1.6;
+  }
+  hr.sep{border:0;border-top:1px solid var(--border-subtle);margin:44px 0}
+  footer{text-align:center;padding:30px 0 60px;color:var(--text-muted);font-size:.88rem}
+  footer .dot{margin:0 6px;opacity:.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <img class="logo" src="assets/icon-256.png" alt="07z" />
+    <h1>07z</h1>
+    <p class="sub">Frontend homebrew y port <strong>no oficial</strong> para jugar a <strong>tu propia copia</strong> de <strong>FIFA 07</strong> de PC en <strong>Nintendo Switch</strong>.</p>
+    <div class="badges">
+      <img src="https://img.shields.io/badge/Platform-Nintendo%20Switch-E60012?style=for-the-badge&logo=nintendoswitch&logoColor=white" alt="Nintendo Switch" />
+      <img src="https://img.shields.io/badge/Versi%C3%B3n-v1.0.0-1D4ED8?style=for-the-badge" alt="v1.0.0" />
+      <img src="https://img.shields.io/badge/Runtime-Wine--NX-A072D2?style=for-the-badge" alt="Wine-NX" />
+      <img src="https://img.shields.io/badge/Licencia-MIT-10E761?style=for-the-badge" alt="MIT" />
+    </div>
+  </header>
+
+  <div class="notice">
+    <span class="ico">⚠️</span>
+    <p><strong>Proyecto NO oficial, sin relación con EA.</strong> Esta web y 07z <strong>no incluyen ni distribuyen el juego FIFA 07</strong> ni ningún fichero con copyright de Electronic Arts. <strong>Debes aportar tu propia copia</strong> de FIFA 07 de PC. FIFA y sus marcas son propiedad de EA.</p>
+  </div>
+
+  <section id="que-es">
+    <h2><span class="e">🎮</span> ¿Qué es 07z?</h2>
+    <p>07z es un <strong>frontend homebrew</strong> —y el envoltorio que lo acompaña— que hace que tu copia de FIFA 07 se ejecute en una Switch con custom firmware <strong>como si fuera un juego nativo</strong>: sin ver nunca Wine ni menús intermedios.</p>
+    <ul class="feat">
+      <li><strong>Icono propio</strong> en el menú de inicio de la consola (<em>07z</em>).</li>
+      <li>Interfaz hecha a medida (<em>Jugar · Configuración · Créditos</em>) con estética Horizon.</li>
+      <li><strong>Wine invisible</strong>: el frontend lanza el juego directamente.</li>
+      <li><strong>Un jugador</strong> con la consola y/o el mando 1. <em>El segundo jugador está en pruebas y aún sin verificar (ver abajo).</em></li>
+      <li>Mapas de teclas editables desde la propia interfaz.</li>
+    </ul>
+  </section>
+
+  <section id="descarga">
+    <h2><span class="e">📥</span> Descarga</h2>
+    <p>Necesitas tres ficheros: el <strong>frontend</strong>, el <strong>runtime</strong> y el <strong>NSP</strong> que crea el icono del HOME. <em>(El juego no se descarga aquí.)</em></p>
+    <div class="cta">
+      <a class="btn btn-primary" href="install/07z-forwarder.nsp" download>⬇️ Descargar NSP (instalador)</a>
+      <a class="btn btn-ghost" href="https://github.com/lozp1/07z/releases/latest" target="_blank" rel="noopener">📦 Runtime + frontend (.nro) → Releases</a>
+    </div>
+    <div class="grid">
+      <div class="card"><h3>1 · NSP forwarder</h3><p>Crea el icono «07z» en el HOME. Se instala con DBI, Goldleaf, Tinfoil o Awoo.</p></div>
+      <div class="card"><h3>2 · 07z.nro</h3><p>El frontend 07z. <em>No incluye el juego.</em></p></div>
+      <div class="card"><h3>3 · wine-nx-runtime.nro</h3><p>El runtime (software libre de terceros). Se copia junto al frontend.</p></div>
+    </div>
+  </section>
+
+  <section id="instalacion">
+    <h2><span class="e">🛠️</span> Instalación en 4 pasos</h2>
+    <pre class="code">1) Copia a la SD:
+     07z.nro              ->  sdmc:/switch/fifa07/07z.nro
+     wine-nx-runtime.nro  ->  sdmc:/switch/fifa07/wine-nx-runtime.nro
+
+2) Pon TU juego en:
+     sdmc:/switch/fifa07/drive_c/FIFA 07/fifa07.exe
+
+3) Instala el NSP (07z-forwarder.nsp) con DBI / Goldleaf / Tinfoil / Awoo.
+
+4) Abre el icono "07z" en el HOME y pulsa JUGAR.</pre>
+    <p style="margin-top:12px">📖 Guía completa: <a href="docs/INSTALACION.md">docs/INSTALACION.md</a></p>
+  </section>
+
+  <section id="experimental" class="notice" style="display:block">
+    <h2 style="margin-top:0"><span class="e">🧪</span> En desarrollo / experimental</h2>
+    <p><strong>Segundo jugador / dos mandos.</strong> Existe una compilación del runtime que, en teoría, permitiría leer los dos Joy-Con por separado (un jugador cada uno). <strong>Aún NO está verificada en consola</strong>, la fusión de los mandos en un solo jugador sigue siendo el comportamiento por defecto, y hay dudas razonables de que FIFA 07 (un juego pensado para teclado) permita realmente un segundo jugador por teclado. Trátalo como <em>experimental</em>.</p>
+  </section>
+
+  <section id="apoyar" style="text-align:center">
+    <h2 style="justify-content:center"><span class="e">❤️</span> Apoya el proyecto</h2>
+    <p>07z es <strong>gratuito y sin ánimo de lucro</strong>: sin publicidad y sin versión de pago. Detrás hay <strong>una sola persona</strong> y muchísimo tiempo. Si te ha gustado y quieres que siga publicando <strong>ports de otros juegos</strong> para Switch, puedes apoyar con una donación por PayPal o, si prefieres, difundiendo el proyecto: cada aporte se traduce en más ports. Y si no puedes colaborar, no pasa nada: entra, juega y disfrútalo. 🎮</p>
+    <div class="cta">
+      <a class="btn btn-paypal" href="https://paypal.me/francopaololg" target="_blank" rel="noopener">💙 Donar por PayPal</a>
+      <a class="btn btn-ghost" href="mailto:francopaolo_lg@outlook.com">✉️ Contacto</a>
+    </div>
+  </section>
+
+  <hr class="sep" />
+
+  <section id="creditos">
+    <h2><span class="e">🙏</span> Créditos</h2>
+    <p>07z se apoya por completo en el trabajo de otros. Todo el mérito de las piezas base es suyo.</p>
+    <div class="credits">
+      <div class="card"><a href="https://github.com/autorunhq/autorun" target="_blank" rel="noopener">Wine-NX / Autorun</a><br><small>El runtime de Windows sobre Horizon OS</small></div>
+      <div class="card"><a href="https://www.winehq.org/" target="_blank" rel="noopener">Wine</a><br><small>La base de la compatibilidad Win32</small></div>
+      <div class="card"><a href="https://github.com/XITRIX/borealis" target="_blank" rel="noopener">Borealis</a><br><small>Framework de UI homebrew</small></div>
+      <div class="card"><a href="https://github.com/switchbrew/libnx" target="_blank" rel="noopener">libnx</a><br><small>Base del homebrew de Switch</small></div>
+      <div class="card"><a href="https://devkitpro.org/" target="_blank" rel="noopener">devkitPro</a><br><small>Toolchain (devkitA64)</small></div>
+      <div class="card"><a href="https://github.com/Ibnuard/pes13_nx" target="_blank" rel="noopener">FEXTendo / PES13-NX</a><br><small>Referencia de integración</small></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Hecho con ❤️ por <strong>lozp1</strong> <span class="dot">·</span> Proyecto no oficial, sin relación con EA <span class="dot">·</span> No se distribuye el juego <span class="dot">·</span> <a href="LICENSE">MIT</a>
+</footer>
+</body>
+</html>
