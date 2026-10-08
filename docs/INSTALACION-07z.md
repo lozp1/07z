@@ -6,7 +6,10 @@
 ## Qué necesitás
 
 - Una Switch con **Atmosphere 1.11.2 OFICIAL** (revisión `5388824…`) y **sigpatches**
-  (da igual `sysMMC` o `emuMMC`). **El parche del punto siguiente es un kernel: va por
+  (da igual `sysMMC` o `emuMMC`). **AMS 1.11.2 soporta firmware hasta 22.5.0**: en
+  firmware **23.0.x** el CFW oficial todavía no va, así que este port **tampoco** puede
+  funcionar ahí (no hay parche posible hasta que Atmosphere lo soporte).
+- **El parche del punto siguiente es un kernel: va por
   versión exacta de Atmosphere Y de firmware.** Si tu consola está en otra versión, puede
   no encajar (pantalla negra al añadirlo) — en ese caso quita los dos ficheros y avisa para
   reconstruirlo para tu versión.
