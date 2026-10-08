@@ -38,3 +38,6 @@ BACKUP-07z/
 
 # backups del port (nunca subir al repo)
 BACKUP-07z/
+
+# notas de desarrollo del port (no publicar)
+notas-dev/
