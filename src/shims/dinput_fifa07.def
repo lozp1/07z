@@ -1,0 +1,7 @@
+; DINPUT.dll shim exports.
+; fifa07.exe imports exactly DirectInputCreateA. Nothing else is exported on
+; purpose: an export this shim cannot honour is worse than a missing one,
+; because the guest would call it and get nonsense.
+LIBRARY DINPUT.dll
+EXPORTS
+    DirectInputCreateA

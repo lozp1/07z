@@ -1,0 +1,8 @@
+; dpnhpast.dll shim exports: the real DirectPlay NAT helper's whole export
+; table. EA only probes the load; see dpnhpast_fifa07.c.
+LIBRARY dpnhpast.dll
+EXPORTS
+    DllGetClassObject
+    DllCanUnloadNow
+    DllRegisterServer
+    DllUnregisterServer
