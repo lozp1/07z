@@ -6,8 +6,10 @@
 ## Qué necesitás
 
 - Una Switch con **Atmosphere 1.11.2 OFICIAL** (revisión `5388824…`) y **sigpatches**
-  (da igual `sysMMC` o `emuMMC`). **Un CFW empaquetado/modificado (packs «all-in-one», MOD…)
-  no sirve**: el parche del punto siguiente no encaja y la consola queda en pantalla negra.
+  (da igual `sysMMC` o `emuMMC`). **El parche del punto siguiente es un kernel: va por
+  versión exacta de Atmosphere Y de firmware.** Si tu consola está en otra versión, puede
+  no encajar (pantalla negra al añadirlo) — en ese caso quita los dos ficheros y avisa para
+  reconstruirlo para tu versión.
 - **El parche de «ventana baja» de Autorun** — **sin él el juego NO arranca** (síntoma:
   pulsás Jugar y te devuelve al menú). Son dos ficheros que van en el Release, en
   **`parche-ventana-baja/`**: `atmosphere/mesosphere.bin` y

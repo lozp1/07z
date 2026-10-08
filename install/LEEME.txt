@@ -22,10 +22,11 @@ QUE HAY EN ESTA CARPETA
 
 REQUISITO EN LA CONSOLA
 -----------------------
-  Necesitas Atmosphere 1.11.2 OFICIAL (el paquete oficial, NO un pack
-  "all-in-one" ni un CFW modificado) con sigpatches (sysMMC o emuMMC, el
-  que uses) Y el PARCHE DE VENTANA BAJA de Autorun, que es OBLIGATORIO:
-  sin el, el juego NO arranca (pulsas Jugar y te devuelve al menu).
+  Necesitas Atmosphere 1.11.2 (revision 5388824...) con sigpatches (sysMMC o
+  emuMMC, el que uses) Y el PARCHE DE VENTANA BAJA de Autorun, que es
+  OBLIGATORIO: sin el, el juego NO arranca (pulsas Jugar y te devuelve al
+  menu). OJO: el parche es un KERNEL, va por version EXACTA de Atmosphere y
+  de firmware; si tu consola esta en otra version puede no encajar.
       atmosphere/mesosphere.bin
       atmosphere/kips/autorun-loader.kip
   Los dos van en el Release, dentro de la carpeta "parche-ventana-baja"
@@ -47,9 +48,10 @@ ANTES DE EMPEZAR (OBLIGATORIO)
      kip1=atmosphere/kips/autorun-loader.kip
   Si arrancas con fusee.bin no hay que anadir nada.
   Si ya tenias Autorun / Wine-NX instalado, ya lo tienes: salta esto.
-  AVISO: el parche es para Atmosphere 1.11.2 OFICIAL. Si al reiniciar te
-  queda la PANTALLA NEGRA, es que tu CFW es un pack modificado: apaga,
-  borra esos dos ficheros y arranca normal (vuelve todo a como estaba).
+  AVISO: el parche es un KERNEL: va por version EXACTA de Atmosphere y de
+  firmware (este es de AMS 1.11.2). Si al reiniciar te queda la PANTALLA
+  NEGRA, es que no encaja con tu version: apaga, borra esos dos ficheros y
+  arranca normal (vuelve todo a como estaba).
 
 PASOS
 -----
