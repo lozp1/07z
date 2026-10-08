@@ -29,7 +29,7 @@ extern "C" int PES13FexCanBatchSMC(uint64_t image, uint64_t image_size, const ch
     if (!image || image_size < 0x100 || image_size > UINT64_MAX - image ||
         !size || size > 65536 || address < image || address - image >= image_size ||
         size > image_size - (address - image) ||
-        (!IsImage(name, "pes2013.exe") && !IsImage(name, "d3d9.dll"))) return 0;
+        (!IsImage(name, "fifa07.exe") && !IsImage(name, "pes2013.exe") && !IsImage(name, "d3d9.dll"))) return 0;
     if (Read<uint16_t>(image) != 0x5a4d) return 0;
     const uint32_t pe = Read<uint32_t>(image + 0x3c);
     if (pe > image_size - 24 || Read<uint32_t>(image + pe) != 0x4550 ||

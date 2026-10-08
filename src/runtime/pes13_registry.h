@@ -40,6 +40,12 @@ static inline unsigned int pes13_registry_install(struct horizon_reg *reg,
     *views = 0;
     if (!enabled) return HORIZON_REG_SUCCESS;
 
+    key = horizon_reg_create_ascii(reg, machine, "Software\\EA SPORTS\\FIFA 07");
+    if (key) {
+        static const unsigned short fifa_dir[] = {'C',':','\\','F','I','F','A',' ','0','7','\\',0};
+        horizon_reg_set_value(reg, key, value_name, sizeof(value_name),
+                              HORIZON_REG_SZ, fifa_dir, sizeof(fifa_dir));
+    }
     key = horizon_reg_create_ascii(reg, machine, "Software\\KONAMI\\PES2013");
     if (!key) return HORIZON_REG_NO_MEMORY;
     status = horizon_reg_set_value(reg, key, value_name, sizeof(value_name),
@@ -55,6 +61,12 @@ static inline unsigned int pes13_registry_install(struct horizon_reg *reg,
     status = horizon_reg_open(reg, machine, wow_path, sizeof(wow_path), 0, &wow);
     if (status == HORIZON_REG_NAME_NOT_FOUND) return HORIZON_REG_SUCCESS;
     if (status) return status;
+    key = horizon_reg_create_ascii(reg, wow, "EA SPORTS\\FIFA 07");
+    if (key) {
+        static const unsigned short fifa_dir[] = {'C',':','\\','F','I','F','A',' ','0','7','\\',0};
+        horizon_reg_set_value(reg, key, value_name, sizeof(value_name),
+                              HORIZON_REG_SZ, fifa_dir, sizeof(fifa_dir));
+    }
     key = horizon_reg_create_ascii(reg, wow, "KONAMI\\PES2013");
     status = key ? horizon_reg_set_value(reg, key, value_name, sizeof(value_name),
                                          HORIZON_REG_SZ, install_dir, sizeof(install_dir))

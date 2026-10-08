@@ -22,9 +22,11 @@ static const char *pes13_graphics_environment(const char *target, size_t *bytes)
 {
     char setting[32];
     *bytes = sizeof(runtime_environment);
-    if (strcmp(target, "sdmc:/switch/pes13-nx/drive_c/PES13/pes2013.exe"))
+    if (strcmp(target, "sdmc:/switch/fifa07-fex/drive_c/FIFA 07/fifa07.exe") &&
+        strcmp(target, "sdmc:/switch/pes13-nx/drive_c/PES13/pes2013.exe"))
         return runtime_environment;
-    if (!read_first_line(RUNTIME_DIR "/drive_c/PES13/pes2013.csmt.txt", setting, sizeof(setting)))
+    if (!read_first_line(RUNTIME_DIR "/drive_c/FIFA 07/fifa07.csmt.txt", setting, sizeof(setting)) &&
+        !read_first_line(RUNTIME_DIR "/drive_c/PES13/pes2013.csmt.txt", setting, sizeof(setting)))
     {
         log_line("[PES13-GFX] csmt=default (no override file)");
         return runtime_environment;

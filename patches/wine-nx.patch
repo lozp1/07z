@@ -283,12 +283,12 @@
  u32 __nx_exception_ignoredebug = 1;
  
 -#define WINE_ROOT "sdmc:/switch/wine"
-+#define WINE_ROOT "sdmc:/switch/pes13-nx"
++#define WINE_ROOT "sdmc:/switch/fifa07-fex"
  #define WINE_DRIVE_C WINE_ROOT "/drive_c"
  #define WINE_SYSTEM_DIR WINE_DRIVE_C "/windows/system32"
  #define RUNTIME_DIR WINE_ROOT
 -#define DEFAULT_TARGET WINE_DRIVE_C "/curl/curl.exe"
-+#define DEFAULT_TARGET WINE_DRIVE_C "/PES13/pes2013.exe"
++#define DEFAULT_TARGET WINE_DRIVE_C "/FIFA 07/fifa07.exe"
  #ifdef WINE_NX_BOX64_DYNAREC
 -#define WINE_NX_RUNTIME_BUILD "nx-wow64-dynarec-108"
 +#define WINE_NX_RUNTIME_BUILD "pes13-nx-0.2.0-vk1-production"
@@ -626,6 +626,7 @@
      log_line( "[INIT] core balancing %s (no-balance.txt)", wine_nx_balance_enabled ? "on" : "off" );
      runtime_profile = read_bool_file( RUNTIME_DIR "/profile.txt" );
      read_key_map( RUNTIME_DIR "/keys.txt" );
++    read_key_map( WINE_DRIVE_C "/FIFA 07/fifa07.keys.txt" );
 +    read_key_map( WINE_DRIVE_C "/PES13/pes2013.keys.txt" );
 +    wine_nx_pes13_keyboard_only = read_bool_file(RUNTIME_DIR "/controller-keyboard.txt");
 +    wine_nx_pes13_gamepad_only = read_bool_file(RUNTIME_DIR "/controller-gamepad.txt");
@@ -740,6 +741,7 @@
      }
      log_line( "[TARGET] %s", target );
 +    wine_nx_pes13_registry_enabled =
++        !strcmp(target, "sdmc:/switch/fifa07-fex/drive_c/FIFA 07/fifa07.exe") ||
 +        !strcmp(target, "sdmc:/switch/pes13-nx/drive_c/PES13/pes2013.exe") ||
 +        !strcmp(target, "sdmc:/switch/pes13-nx/drive_c/PES13/settings.exe");
 +    log_line( "[PES13-REG] installation metadata %s", wine_nx_pes13_registry_enabled ? "enabled" : "disabled" );
