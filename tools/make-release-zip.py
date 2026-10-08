@@ -66,7 +66,7 @@ with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as z:
                 motivos["perfil"] += 1
                 continue
             p = os.path.join(root, f)
-            z.write(p, os.path.join(rel, f).replace("\\", "/"))
+            z.write(p, "switch/fifa07/" + os.path.join(rel, f).replace("\\", "/"))
             n += 1
             total += os.path.getsize(p)
 
