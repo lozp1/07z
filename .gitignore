@@ -32,3 +32,9 @@ __pycache__/
 # Frontend 07z: artefactos de build y enlace externo a Borealis
 /frontend-nx/build/
 /frontend-nx/extern/
+
+# backups del port (nunca subir al repo)
+BACKUP-07z/
+
+# backups del port (nunca subir al repo)
+BACKUP-07z/
