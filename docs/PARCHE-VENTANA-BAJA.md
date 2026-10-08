@@ -28,7 +28,7 @@ Sin el parche: el exe no se puede mapear → el runtime no arranca → **vuelta 
 > acabas de copiar y arranca normal** — vuelve todo a como estaba. Si quieres el parche
 > para tu versión, avisa: se reconstruye para esas versiones exactas.
 
-Los dos ficheros van en el **ZIP completo** del Release (`07z-SD-completo.zip`), o sueltos en `07z-parche-ventana-baja.zip` (`README.txt` y
+Los dos ficheros van en el **ZIP completo** del Release (`1-07z-PAQUETE-COMPLETO.zip`), o sueltos en `2-07z-PARCHE-VENTANA-BAJA.zip` (`README.txt` y
 `LICENSE.Atmosphere.txt` incluidos).
 
 ## Instalación
