@@ -18,8 +18,31 @@ es `dist/github-07z/docs/INSTALACION.md`; el contenido es el mismo.*
 
 **No hace falta**: particiones nuevas, **kips**, overclock, ni pasar por el
 asistente de setup de Autorun. El `config/settings.json` que viene dentro de la
-carpeta ya trae `setup-complete=1`, `run-the-chosen-program=true` y
-`reopen-the-launcher-on-exit=false`, así que arranca directo.
+carpeta ya trae `run-the-chosen-program=true` y
+`reopen-the-launcher-on-exit=false`, con la biblioteca y el objetivo ya fijados
+(`launcher.txt` / `target.txt`), así que arranca directo al juego.
+
+---
+
+## ¿Qué descargo? (contenido del paquete)
+
+```
+07z/
+├── switch/
+│   └── fifa07/            <-- el port: copia ESTA carpeta a sdmc:/switch/
+└── 07z-forwarder.nsp      <-- el instalador del icono del HOME
+```
+
+**Solo eso.** Copia la carpeta `switch/` a la raíz de la SD (fusionando) y el
+`.nsp` donde quieras; luego lo instalas (sección 2).
+
+> ⚠️ **NO copies `bootloader/` ni `emuMMC/`** aunque los veas en *otras*
+> distribuciones de homebrew: **son cosas de la consola** (la configuración de
+> arranque de Hekate y la emuMMC de quien las hizo). Copiarlos encima **no aporta
+> nada a 07z y puede desconfigurar tu consola.**
+>
+> 07z **no crea particiones**, no instala kips y no añade entradas de arranque:
+> vive entero dentro de `sdmc:/switch/fifa07/`.
 
 ---
 
@@ -28,7 +51,8 @@ carpeta ya trae `setup-complete=1`, `run-the-chosen-program=true` y
 - Una **Nintendo Switch** con **custom firmware** (Atmosphere) y **sigpatches**
   recientes. Vale tanto `sysMMC` como `emuMMC`.
 - **Tu propia copia de FIFA 07 de PC** (`fifa07.exe`, sus datos y sus DLLs).
-- Una **tarjeta SD** con ~250 MB libres (runtime + frontend + tu copia del juego).
+- Una **tarjeta SD** con espacio suficiente: el port ocupa **~60 MB** y tu copia
+  del juego lo que ocupe en tu PC (normalmente **2-4 GB**).
 - Un **instalador de NSP**: **DBI, Goldleaf, Tinfoil o Awoo Installer**.
 - Los **ficheros de 07z**:
   - la **carpeta `fifa07`** (runtime `wine-nx-runtime.nro` + frontend `07z.nro`
@@ -145,7 +169,7 @@ editar desde la pantalla **Configuración** de 07z o a mano.
 | **Y** | `0x41` (A) | — | Centro / pase largo |
 | **R** | `0x45` (E) | — | Sprint |
 | **L** | `0x10` (Mayús) | — | Regate / skill move |
-| **ZR** | `0x20` (ESPACIO) | — | reservado (FIFA 07 no usa ESPACIO) |
+| **ZR** | `0x20` (ESPACIO) | Avanzar en las pantallas que lo pidan | — (FIFA 07 no usa ESPACIO en partido) |
 | **ZL** | `0x53` (S) | — | Pase (redundante con **A**) |
 | **PLUS** | `0x1b` (ESCAPE) | Atrás | Pausa |
 | **MINUS** | `0x0d` (ENTER) | Confirmar | — |
