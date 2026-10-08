@@ -24,3 +24,11 @@ __pycache__/
 *.tar.gz
 *.tar.xz
 *.nsp
+
+# Varios backups locales a mano (nunca versionar)
+*.bak
+*.bak-*
+
+# Frontend 07z: artefactos de build y enlace externo a Borealis
+/frontend-nx/build/
+/frontend-nx/extern/
