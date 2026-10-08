@@ -6,7 +6,17 @@
 ## Qué necesitás
 
 - Una Switch con **Atmosphere y sigpatches** (da igual `sysMMC` o `emuMMC`).
-- **Tu copia de FIFA 07 de PC**.
+- **Tu copia de FIFA 07 de PC**, **instalada y funcional**. Para que sirva tiene que
+  traer los datos completos:
+
+  | Carpeta / fichero | Debe tener |
+  |---|---|
+  | `alocale/` | **21 archivos** |
+  | `data/` | **3272 archivos** |
+  | `fifa07.exe` | **5.242.880 bytes (5,00 MB)** |
+
+  **NO sirven**: instaladores sueltos, ISOs, copias «a medias» ni packs raros con
+  `plugins/` o `unins000` (esos son otra cosa, no una instalación del juego).
 - Una **SD** con espacio: el port ocupa ~60 MB y tu juego lo que ocupe en tu PC.
 - Un **instalador de NSP**: DBI, Goldleaf, Tinfoil o Awoo.
 - Los ficheros de 07z: la **carpeta `fifa07`** y **`07z-forwarder.nsp`**
@@ -21,6 +31,13 @@
    ```
    sdmc:/switch/fifa07/drive_c/FIFA 07/fifa07.exe
    ```
+
+   > ⚠️ **Copiá tu juego DENTRO de la carpeta, sin reemplazarla.** Los ficheros de 07z
+   > (`DINPUT.dll`, `dmusic.dll`, `dpnhpast.dll`, `MSIMG32.dll`, `OLEACC.dll`, `sensapi.dll`,
+   > `d3d8.dll`, `dxwrapper.dll`, `dxwrapper.ini`, `d3d9.dll`, `dxvk.conf`,
+   > `fifa07.keys.txt`, `fifa07.wine-nx.txt`) tienen que quedar **junto a tu `fifa07.exe`**.
+   > Si los pisas con tu copia del juego: pide **DirectX 9.0c**, o te quedas **sin mandos**,
+   > o **pantalla negra**.
 
 3. Instalá **`07z-forwarder.nsp`** con DBI, Goldleaf, Tinfoil o Awoo.
 4. En el **menú de inicio** aparece el icono **07z**. Pulsalo y después **Jugar**.
@@ -65,6 +82,10 @@ Vienen configurados. Se cambian desde la pantalla **Configuración** de 07z.
 | El icono del HOME no abre 07z | Comprobá que existe `sdmc:/switch/fifa07/07z.nro` con ese nombre exacto |
 | Sale «Abre desde el menú de inicio» | Lo lanzaste desde el Homebrew Menu: usá el icono del HOME |
 | El juego no arranca | Comprobá que copiaste **todos** los datos del juego, no solo el `.exe` |
+| **Sale una ventana de Windows** (o pide **«install DirectX 9.0c»**) | Faltan los ficheros de 07z junto al `.exe`: **los pisaste** al copiar tu juego → volvé a copiar el paquete de **Releases** sin reemplazar la carpeta |
+| **Los mandos no responden a nada** | Falta `DINPUT.dll` junto al `.exe` → recopialo del paquete |
+| **Pantalla negra** o no entra al partido | Falta el puente gráfico (`d3d8.dll`, `dxwrapper.dll`, `dxwrapper.ini`, `d3d9.dll`, `dxvk.conf`) → recopialos del paquete |
+| El juego no arranca y tu copia vino de un pack | Usá una instalación **normal** de FIFA 07 (ver «Qué necesitás»): packs con `plugins/` o `unins000` no sirven |
 | Se ven barras negras | Ajustes → Pantalla → **1280x720** |
 | La primera vez va a tirones | Está compilando shaders: a la segunda vez va fluido |
 | Error `0xc0000135` o `0xc000007b` | Volvé a copiar el runtime de **Releases** y verificá el `.exe` del juego |
