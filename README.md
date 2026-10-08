@@ -201,8 +201,8 @@ No. Para jugar hay que lanzar 07z **desde el icono del HOME** (el NSP). Desde el
 
 **¿Necesito instalar algún kip o parche de Atmosphere?**
 **Sí: el «parche de ventana baja»** — es obligatorio. Son dos ficheros
-(`atmosphere/mesosphere.bin` y `atmosphere/kips/autorun-loader.kip`) que van en el Release, en
-`parche-ventana-baja/`. FIFA 07 es un ejecutable con direcciones fijas (`0x400000`): sin ese
+(`atmosphere/mesosphere.bin` y `atmosphere/kips/autorun-loader.kip`) que van en
+el **ZIP completo del Release** (`07z-SD-completo.zip`), o suelto en `07z-parche-ventana-baja.zip`. FIFA 07 es un ejecutable con direcciones fijas (`0x400000`): sin ese
 parche el kernel no le da la ventana baja y el juego **no arranca** (pulsás Jugar y volvés al
 menú). Es un **kernel**, así que va por **versión exacta**: este es para Atmosphere 1.11.2
 (revisión `5388824…`). Si tu consola está en otra versión puede no encajar y quedarse en
