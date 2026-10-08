@@ -46,6 +46,20 @@ PASOS
    de forma que exista:
      sdmc:/switch/fifa07/drive_c/FIFA 07/fifa07.exe
 
+   OJO: copia tu juego DENTRO de esa carpeta, SIN reemplazarla. Los
+   ficheros de 07z (DINPUT.dll, dmusic.dll, dpnhpast.dll, MSIMG32.dll,
+   OLEACC.dll, sensapi.dll, d3d8.dll, dxwrapper.dll, dxwrapper.ini,
+   d3d9.dll, dxvk.conf, fifa07.keys.txt, fifa07.wine-nx.txt) tienen que
+   quedar JUNTO a tu fifa07.exe. Si los pisas con tu copia: el juego
+   pide "install DirectX 9.0c", o te quedas sin mandos, o pantalla negra.
+
+   Y tu copia tiene que estar COMPLETA (no vale solo el .exe):
+     alocale/    -> 21 archivos
+     data/       -> 3272 archivos
+     fifa07.exe  -> 5.242.880 bytes (5,00 MB)
+   No sirven instaladores sueltos, ISOs, copias a medias, ni packs
+   raros con "plugins/" o "unins000" (eso es otra cosa, no el juego).
+
 3. Instala este NSP (07z-forwarder.nsp) con DBI, Goldleaf, Tinfoil
    o Awoo Installer.
 
@@ -82,6 +96,23 @@ RENDIMIENTO
   tirones de los menus 3D son compilacion de shaders: a la segunda
   vez que entras, van fluidos. El overclock es OPCIONAL (el port no
   lo necesita).
+
+SI ALGO FALLA
+-------------
+  Sale una ventana de Windows / pide "install DirectX 9.0c"
+      -> Faltan los ficheros de 07z junto al .exe (se pisaron al copiar
+         tu juego): vuelve a copiar el paquete SIN reemplazar la carpeta.
+  Los mandos no responden a nada
+      -> Falta DINPUT.dll junto al .exe. Recopialo del paquete.
+  Pantalla negra / no entra al partido
+      -> Falta el puente grafico (d3d8.dll, dxwrapper.dll,
+         dxwrapper.ini, d3d9.dll, dxvk.conf). Recopialos del paquete.
+  El juego no arranca y tu copia vino de un pack
+      -> Usa una instalacion NORMAL de FIFA 07 (ver el paso 2).
+  Se ven barras negras
+      -> Ajustes -> Pantalla -> 1280x720.
+  La primera vez va a tirones
+      -> Esta compilando shaders: a la segunda vez va fluido.
 
 DESINSTALAR
 -----------

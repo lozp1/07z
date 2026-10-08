@@ -98,5 +98,9 @@
   {
     "file": "oledlg.dll",
     "sha256": "dcb17bf80c647efc25474d3a60516ce910af1ff8a1da53fe8897e156021629cc"
+  },
+  {
+    "file": "xinput9_1_0.dll",
+    "sha256": "642a4d0dd8892ccfbed5f6666bba60972bf3d0fc014f8f508b29d158dc5e5ac9"
   }
 ]
