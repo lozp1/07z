@@ -80,6 +80,7 @@ Vienen configurados. Se cambian desde la pantalla **Configuración** de 07z.
 | Síntoma | Qué hacer |
 |---|---|
 | El icono del HOME no abre 07z | Comprobá que existe `sdmc:/switch/fifa07/07z.nro` con ese nombre exacto |
+| **Pulso Jugar y me devuelve al menú** | (1) Lanzalo desde el **icono del HOME**, no desde el Homebrew Menu. (2) **Cerrá cualquier juego abierto/en segundo plano y reiniciá la consola**: un juego suspendido deja el homebrew sin memoria y el runtime no arranca. (3) Comprobá que tu copia del paquete está **completa**: `wine-nx-runtime.nro` (43 MB) y `drive_c/windows/` además de `drive_c/FIFA 07/` |
 | Sale «Abre desde el menú de inicio» | Lo lanzaste desde el Homebrew Menu: usá el icono del HOME |
 | El juego no arranca | Comprobá que copiaste **todos** los datos del juego, no solo el `.exe` |
 | **Sale una ventana de Windows** (o pide **«install DirectX 9.0c»**) | Faltan los ficheros de 07z junto al `.exe`: **los pisaste** al copiar tu juego → volvé a copiar el paquete de **Releases** sin reemplazar la carpeta |
