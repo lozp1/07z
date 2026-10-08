@@ -5,19 +5,17 @@
 
 ## Qué necesitás
 
-- Una Switch con **Atmosphere 1.11.2 OFICIAL** (revisión `5388824…`) y **sigpatches**
-  (da igual `sysMMC` o `emuMMC`). **AMS 1.11.2 soporta firmware hasta 22.5.0**: en
-  firmware **23.0.x** el CFW oficial todavía no va, así que este port **tampoco** puede
-  funcionar ahí (no hay parche posible hasta que Atmosphere lo soporte).
-- **El parche del punto siguiente es un kernel: va por
-  versión exacta de Atmosphere Y de firmware.** Si tu consola está en otra versión, puede
-  no encajar (pantalla negra al añadirlo) — en ese caso quita los dos ficheros y avisa para
-  reconstruirlo para tu versión.
-- **El parche de «ventana baja» de Autorun** — **sin él el juego NO arranca** (síntoma:
-  pulsás Jugar y te devuelve al menú). Vienen en el **ZIP completo del Release**
-  (`1-07z-PAQUETE-COMPLETO.zip`, con la carpeta `atmosphere/` ya puesta) o sueltos en
-  `2-07z-PARCHE-VENTANA-BAJA.zip`: `atmosphere/mesosphere.bin` y
-  `atmosphere/kips/autorun-loader.kip`. Cómo se instalan:
+- Una Switch con **Atmosphere** y **sigpatches** (da igual `sysMMC` o `emuMMC`). El port
+  soporta **dos** versiones de Atmosphere: **1.11.2** (firmware hasta 22.5.0) y
+  **1.12.0** (firmware 23.0.x). Mirá la tuya en **Ajustes → Sistema**: sale algo como
+  `23.0.1 | AMS 1.12.0 | S`.
+- **El parche de «ventana baja»** — **sin él el juego NO arranca** (síntoma: pulsás Jugar y
+  te devuelve al menú). **Es un kernel: va por versión exacta de Atmosphere.** Elegí el tuyo:
+  · **AMS 1.11.2** → `2-07z-PARCHE-VENTANA-BAJA.zip`
+  · **AMS 1.12.0** → `4-07z-PARCHE-VENTANA-BAJA-AMS-1.12.0.zip`
+
+  Los dos vienen también (con todo lo demás ya colocado) en el **ZIP completo**:
+  `1-07z-PAQUETE-COMPLETO.zip`. Cómo se instalan:
   [docs/PARCHE-VENTANA-BAJA.md](PARCHE-VENTANA-BAJA.md).
 - **Tu copia de FIFA 07 de PC**, **instalada y funcional**. Para que sirva tiene que
   traer los datos completos:
@@ -99,7 +97,7 @@ Vienen configurados. Se cambian desde la pantalla **Configuración** de 07z.
 | Síntoma | Qué hacer |
 |---|---|
 | El icono del HOME no abre 07z | Comprobá que existe `sdmc:/switch/fifa07/07z.nro` con ese nombre exacto |
-| **Pulso Jugar y me devuelve al menú** | **Causa nº1: te falta el parche de «ventana baja»** (Atmosphere 1.11.2 + `mesosphere.bin` + `autorun-loader.kip`): es *su* síntoma exacto → instalalo según [docs/PARCHE-VENTANA-BAJA.md](PARCHE-VENTANA-BAJA.md). Si ya lo tenés: (2) lanzalo desde el **icono del HOME** — **ni** Homebrew Menu **ni** instalador (en *modo applet* no hay memoria para el runtime). (3) **Cerrá cualquier juego abierto en segundo plano y reiniciá la consola**. (4) Comprobá que tu copia está **completa**: `wine-nx-runtime.nro` (43 MB) y `drive_c/windows/` además de `drive_c/FIFA 07/` |
+| **Pulso Jugar y me devuelve al menú** | **Causa nº1: te falta el parche de «ventana baja»** (Atmosphere 1.11.2 + `mesosphere.bin` + `autorun-loader.kip`): es *su* síntoma exacto → instalalo según [docs/PARCHE-VENTANA-BAJA.md](PARCHE-VENTANA-BAJA.md). Si ya lo tenés: **(2) tenés instalado un forwarder VIEJO** — mirá `logs/autorun_runtime.log`: la línea `[LOWVA] forwarder title <id>` debe decir **0548eabb35576000**; si dice otro (el viejo es `058f3083dc72b000`) el juego **nunca** arranca → instalá el `07z-forwarder.nsp` **actual** y **borrá el icono viejo** (te quedan dos). (3) lanzalo desde el **icono del HOME** — **ni** Homebrew Menu **ni** instalador (en *modo applet* no hay memoria para el runtime). (4) **Cerrá cualquier juego abierto en segundo plano y reiniciá la consola**. (5) Comprobá que tu copia está **completa**: `wine-nx-runtime.nro` (43 MB) y `drive_c/windows/` además de `drive_c/FIFA 07/` |
 | Sale «Abre desde el menú de inicio» | Lo lanzaste desde el Homebrew Menu: usá el icono del HOME |
 | El juego no arranca | Comprobá que copiaste **todos** los datos del juego, no solo el `.exe` |
 | **Sale una ventana de Windows** (o pide **«install DirectX 9.0c»**) | Faltan los ficheros de 07z junto al `.exe`: **los pisaste** al copiar tu juego → volvé a copiar el paquete de **Releases** sin reemplazar la carpeta |
