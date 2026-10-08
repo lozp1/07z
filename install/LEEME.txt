@@ -1,0 +1,93 @@
+================================================================
+ 07z - FIFA 07 en Nintendo Switch
+ Instalacion rapida (LEEME)
+================================================================
+
+AVISO
+-----
+07z es un proyecto NO oficial y SIN relacion con EA.
+Este paquete NO incluye el juego FIFA 07. Debes aportar TU PROPIA
+copia de FIFA 07 de PC. El juego es propiedad de Electronic Arts.
+
+QUE HAY EN ESTA CARPETA
+-----------------------
+  07z-forwarder.nsp       -> El "acceso directo" que crea el icono
+                             "07z" en el menu de inicio (HOME).
+
+  IMPORTANTE: el NSP por si solo NO basta. Tambien necesitas la
+  carpeta "fifa07" (runtime + frontend), que se descarga desde la
+  pestana "Releases" de este repositorio. Dentro van, entre otros:
+     - wine-nx-runtime.nro   (el runtime)
+     - 07z.nro               (el frontend 07z)
+
+REQUISITO EN LA CONSOLA
+-----------------------
+  Solo necesitas Atmosphere con sigpatches (sysMMC o emuMMC, el que
+  uses). NO hace falta instalar kips, ni particiones nuevas, ni
+  overclock, ni pasar por el asistente de setup de Autorun: el
+  config/settings.json que va dentro de la carpeta ya lleva el arranque
+  directo (run-the-chosen-program=true,
+  reopen-the-launcher-on-exit=false) y la biblioteca y el objetivo fijados.
+
+PASOS
+-----
+0. Lo que descargas es: la carpeta "switch" (con "fifa07" dentro) y
+   "07z-forwarder.nsp". NO copies carpetas "bootloader" ni "emuMMC"
+   de otras distribuciones: son de la consola, no de 07z.
+
+1. Copia la carpeta "fifa07" a la SD, de forma que quede:
+     sdmc:/switch/fifa07/07z.nro
+     sdmc:/switch/fifa07/wine-nx-runtime.nro
+     sdmc:/switch/fifa07/config/ ...
+     sdmc:/switch/fifa07/drive_c/ ...
+
+2. Copia tu juego dentro de:
+     sdmc:/switch/fifa07/drive_c/FIFA 07/
+   de forma que exista:
+     sdmc:/switch/fifa07/drive_c/FIFA 07/fifa07.exe
+
+3. Instala este NSP (07z-forwarder.nsp) con DBI, Goldleaf, Tinfoil
+   o Awoo Installer.
+
+4. Aparecera el icono "07z" en el HOME. Pulsalo y luego pulsa JUGAR.
+
+5. UNA VEZ, en el juego: Mi FIFA 07 -> Ajustes -> Pantalla y elige
+   1280x720 (NO 1280x1024, que es 5:4 y deja barras negras). Es el
+   unico modo 16:9 nativo del juego.
+
+REGLA DE ORO
+------------
+Para jugar, lanza SIEMPRE 07z desde el icono del HOME (el NSP).
+Desde el Homebrew Menu NO es posible jugar.
+
+CONTROLES (mando -> tecla de FIFA)
+----------------------------------
+  A     = ENTER + S   (confirmar en menus / pase en partido)
+  B     = D           (tiro / entrada)   [atras en menus = PLUS]
+  X     = W           (pase filtrado / salida del portero)
+  Y     = A           (centro / pase largo)
+  R     = E           (sprint)
+  L     = Mayus       (regate / skill)
+  ZL    = S           (pase; igual que A)
+  ZR    = ESPACIO     (avanzar en las pantallas que lo pidan)
+  PLUS  = ESCAPE      (atras / pausa)
+  MINUS = ENTER       (confirmar)
+  Cruceta / stick izq. = flechas (mover)
+  Clic stick izq. = Z (amago)  |  Clic stick der. = C (ritmo)
+  (No se mapean Q ni el teclado numerico a proposito.)
+
+RENDIMIENTO
+-----------
+  55-60 FPS en partido con graficos y resolucion en ALTO. Los
+  tirones de los menus 3D son compilacion de shaders: a la segunda
+  vez que entras, van fluidos. El overclock es OPCIONAL (el port no
+  lo necesita).
+
+DESINSTALAR
+-----------
+1. Desinstala el NSP (Ajustes de datos / tu instalador).
+2. Borra la carpeta sdmc:/switch/fifa07/ completa.
+No queda nada mas: 07z no escribe fuera de esa carpeta.
+
+Guia completa: ../docs/INSTALACION.md
+================================================================
