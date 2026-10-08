@@ -22,12 +22,34 @@ QUE HAY EN ESTA CARPETA
 
 REQUISITO EN LA CONSOLA
 -----------------------
-  Solo necesitas Atmosphere con sigpatches (sysMMC o emuMMC, el que
-  uses). NO hace falta instalar kips, ni particiones nuevas, ni
-  overclock, ni pasar por el asistente de setup de Autorun: el
-  config/settings.json que va dentro de la carpeta ya lleva el arranque
-  directo (run-the-chosen-program=true,
+  Necesitas Atmosphere 1.11.2 OFICIAL (el paquete oficial, NO un pack
+  "all-in-one" ni un CFW modificado) con sigpatches (sysMMC o emuMMC, el
+  que uses) Y el PARCHE DE VENTANA BAJA de Autorun, que es OBLIGATORIO:
+  sin el, el juego NO arranca (pulsas Jugar y te devuelve al menu).
+      atmosphere/mesosphere.bin
+      atmosphere/kips/autorun-loader.kip
+  Los dos van en el Release, dentro de la carpeta "parche-ventana-baja"
+  (con su README y su licencia). NO hacen falta particiones nuevas ni
+  overclock, ni pasar por el asistente de setup de Autorun propio de
+  Wine-NX: el config/settings.json que va dentro de la carpeta ya lleva
+  el arranque directo (run-the-chosen-program=true,
   reopen-the-launcher-on-exit=false) y la biblioteca y el objetivo fijados.
+
+ANTES DE EMPEZAR (OBLIGATORIO)
+------------------------------
+  El PARCHE DE VENTANA BAJA (ver "REQUISITO EN LA CONSOLA"). Con la
+  consola APAGADA copia a la SD:
+     atmosphere/mesosphere.bin
+     atmosphere/kips/autorun-loader.kip
+  Si arrancas con Hekate: duplica tu entrada que funciona y anade, justo
+  despues de su linea fss0/pkg3 (sin tocar lo demas):
+     kernel=atmosphere/mesosphere.bin
+     kip1=atmosphere/kips/autorun-loader.kip
+  Si arrancas con fusee.bin no hay que anadir nada.
+  Si ya tenias Autorun / Wine-NX instalado, ya lo tienes: salta esto.
+  AVISO: el parche es para Atmosphere 1.11.2 OFICIAL. Si al reiniciar te
+  queda la PANTALLA NEGRA, es que tu CFW es un pack modificado: apaga,
+  borra esos dos ficheros y arranca normal (vuelve todo a como estaba).
 
 PASOS
 -----
@@ -102,6 +124,11 @@ RENDIMIENTO
 
 SI ALGO FALLA
 -------------
+  Pulso Jugar y me devuelve al MENU
+      -> CAUSA Nº1: falta el PARCHE DE VENTANA BAJA (ver "ANTES DE
+         EMPEZAR"). Es su sintoma exacto. Si ya lo tienes: lanza desde
+         el ICONO DEL HOME (no Homebrew Menu ni instalador) y cierra
+         cualquier juego abierto en segundo plano; luego reinicia.
   Sale una ventana de Windows / pide "install DirectX 9.0c"
       -> Faltan los ficheros de 07z junto al .exe (se pisaron al copiar
          tu juego): vuelve a copiar el paquete SIN reemplazar la carpeta.
