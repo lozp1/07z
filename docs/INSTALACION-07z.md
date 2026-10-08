@@ -11,8 +11,9 @@
   no encajar (pantalla negra al añadirlo) — en ese caso quita los dos ficheros y avisa para
   reconstruirlo para tu versión.
 - **El parche de «ventana baja» de Autorun** — **sin él el juego NO arranca** (síntoma:
-  pulsás Jugar y te devuelve al menú). Son dos ficheros que van en el Release, en
-  **`parche-ventana-baja/`**: `atmosphere/mesosphere.bin` y
+  pulsás Jugar y te devuelve al menú). Vienen en el **ZIP completo del Release**
+  (`07z-SD-completo.zip`, con la carpeta `atmosphere/` ya puesta) o sueltos en
+  `07z-parche-ventana-baja.zip`: `atmosphere/mesosphere.bin` y
   `atmosphere/kips/autorun-loader.kip`. Cómo se instalan:
   [docs/PARCHE-VENTANA-BAJA.md](PARCHE-VENTANA-BAJA.md).
 - **Tu copia de FIFA 07 de PC**, **instalada y funcional**. Para que sirva tiene que

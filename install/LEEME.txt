@@ -29,8 +29,8 @@ REQUISITO EN LA CONSOLA
   de firmware; si tu consola esta en otra version puede no encajar.
       atmosphere/mesosphere.bin
       atmosphere/kips/autorun-loader.kip
-  Los dos van en el Release, dentro de la carpeta "parche-ventana-baja"
-  (con su README y su licencia). NO hacen falta particiones nuevas ni
+  Los dos van en el Release, dentro del ZIP completo (07z-SD-completo.zip),
+  junto con su README y su licencia. NO hacen falta particiones nuevas ni
   overclock, ni pasar por el asistente de setup de Autorun propio de
   Wine-NX: el config/settings.json que va dentro de la carpeta ya lleva
   el arranque directo (run-the-chosen-program=true,
