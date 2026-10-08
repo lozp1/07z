@@ -72,7 +72,10 @@ PASOS
 REGLA DE ORO
 ------------
 Para jugar, lanza SIEMPRE 07z desde el icono del HOME (el NSP).
-Desde el Homebrew Menu NO es posible jugar.
+NO vale el Homebrew Menu, y TAMPOCO los instaladores (DBI, Tinfoil,
+Goldleaf): desde ahi el titulo arranca en "modo applet", sin memoria
+suficiente, y te devuelve al menu. Sal del instalador del todo, cierra
+cualquier juego abierto en segundo plano y pulsa el icono 07z del HOME.
 
 CONTROLES (mando -> tecla de FIFA)
 ----------------------------------
