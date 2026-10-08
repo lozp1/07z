@@ -1,0 +1,28 @@
+controller_switch.png / controller_source.png
+=============================================
+Imagen base del DIAGRAMA DEL MANDO de la pantalla "Configuracion de mandos"
+del frontend 07z.
+
+Titulo original : Nintendo Switch Joy-Con Grip Controller.png
+Autor           : Owen1962
+Fuente          : Wikimedia Commons
+                  https://commons.wikimedia.org/wiki/File:Nintendo_Switch_Joy-Con_Grip_Controller.png
+Descripcion     : Nintendo Switch Joy-Con Grip controller with left and right
+                  Joy-Cons attached (vista frontal, par de Joy-Con en el grip).
+Licencia        : DOMINIO PUBLICO (PD-self). El autor libera la obra al dominio
+                  publico en todo el mundo: "I, the copyright holder of this
+                  work, release this work into the public domain. This applies
+                  worldwide. [...] I grant anyone the right to use this work for
+                  any purpose, without any conditions".
+                  La ficha de Commons declara ademas CC-BY-SA-4.0 (licencia
+                  dual): aqui se usa la opcion de DOMINIO PUBLICO.
+                  Ficha: https://creativecommons.org/publicdomain/zero/1.0/
+Cambios         : recorte del fondo a transparente, reencuadre, escalado a
+                  1000x782 y anadido de un rim/borde claro para que la silueta
+                  se lea sobre el fondo oscuro del tema. Reproducible con
+                  tools/generate_controller.py a partir de
+                  tools/controller_source.png (mismo recorte en PNG).
+
+Esta atribucion se incluye por cortesia y por respeto a la ficha de Commons.
+Aviso legal: proyecto NO OFICIAL, sin afiliacion con Nintendo; "Nintendo Switch"
+es una marca de Nintendo. Este frontend no incluye contenido del juego original.
