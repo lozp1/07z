@@ -22,14 +22,17 @@ QUE HAY EN ESTA CARPETA
 
 REQUISITO EN LA CONSOLA
 -----------------------
-  Necesitas Atmosphere 1.11.2 (revision 5388824...) con sigpatches (sysMMC o
-  emuMMC, el que uses) Y el PARCHE DE VENTANA BAJA de Autorun, que es
-  OBLIGATORIO: sin el, el juego NO arranca (pulsas Jugar y te devuelve al
-  menu). OJO: el parche es un KERNEL, va por version EXACTA de Atmosphere y
-  de firmware; si tu consola esta en otra version puede no encajar.
+  Necesitas Atmosphere con sigpatches (sysMMC o emuMMC, el que uses) Y el
+  PARCHE DE VENTANA BAJA de Autorun, que es OBLIGATORIO: sin el, el juego
+  NO arranca (pulsas Jugar y te devuelve al menu).
+  OJO: el parche es un KERNEL: va por version EXACTA de Atmosphere. Hay dos:
+      AMS 1.11.2  (firmware hasta 22.5.0) -> 2-07z-PARCHE-VENTANA-BAJA.zip
+      AMS 1.12.0  (firmware 23.0.x)       -> 4-07z-PARCHE-VENTANA-BAJA-AMS-1.12.0.zip
+  Mira tu version en Ajustes -> Sistema (sale algo como "23.0.1 | AMS 1.12.0 | S").
+  Se instala copiando a la SD, con la consola APAGADA:
       atmosphere/mesosphere.bin
       atmosphere/kips/autorun-loader.kip
-  Los dos van en el Release, dentro del ZIP completo (1-07z-PAQUETE-COMPLETO.zip),
+  Todo esta en el ZIP completo del Release (1-07z-PAQUETE-COMPLETO.zip),
   junto con su README y su licencia. NO hacen falta particiones nuevas ni
   overclock, ni pasar por el asistente de setup de Autorun propio de
   Wine-NX: el config/settings.json que va dentro de la carpeta ya lleva
