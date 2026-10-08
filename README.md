@@ -73,15 +73,22 @@ Hay cosas que estamos probando y que **todavía no podemos prometer**. Las dejam
 
 | # | Necesitas | Detalle |
 |---|-----------|---------|
-| 1 | **Nintendo Switch** con **custom firmware** | Atmosphere **con sigpatches** (vale `sysMMC` o `emuMMC`) |
+| 1 | **Nintendo Switch** con **custom firmware** | Atmosphere **1.11.2 OFICIAL** (revisión `5388824…`) con sigpatches — vale `sysMMC` o `emuMMC`. **Con un CFW empaquetado/modificado no encaja** (ver nota de abajo) |
 | 2 | **Tu propia copia de FIFA 07 de PC** | `fifa07.exe` + sus datos. **No se incluye** |
 | 3 | **Tarjeta SD** con espacio | ~60 MB del port **+** lo que ocupe tu copia del juego (2-4 GB) |
 | 4 | **Un instalador de NSP** en la consola | DBI, Goldleaf, Tinfoil, Awoo Installer… |
 | 5 | **`prod.keys`** (solo para instalar NSP) | El que ya uses habitualmente en tu consola |
 | 6 | Los ficheros de **07z** | La **carpeta `fifa07`** (runtime + frontend `07z.nro`) desde **Releases**, y el **NSP** en [`install/`](install/) |
 
-> ✅ **Lo que NO hace falta**: ni particiones nuevas, ni **kips**, ni overclock, ni
-> pasar por ningún asistente de setup. Basta con tu Atmosphere+sigpatches actual.
+> ⚙️ **Lo único que SÍ hay que añadir**: el **parche de «ventana baja»** de Autorun
+> (`atmosphere/mesosphere.bin` + `atmosphere/kips/autorun-loader.kip`) — **sin él el juego no
+> arranca**: pulsás Jugar y te devuelve al menú. Es para **Atmosphere 1.11.2 OFICIAL**: con un
+> pack/repack modificado (AIO, MOD…) **la consola se queda en pantalla negra** al añadirlo
+> (se quitan los dos ficheros y vuelve a arrancar). Cómo se instala:
+> [`docs/PARCHE-VENTANA-BAJA.md`](docs/PARCHE-VENTANA-BAJA.md).
+>
+> ✅ **Lo que NO hace falta**: ni particiones nuevas, ni overclock, ni pasar por ningún
+> asistente de setup.
 > La carpeta `fifa07` ya trae un `config/settings.json` con
 > `run-the-chosen-program=true` y `reopen-the-launcher-on-exit=false`, y la
 > biblioteca y el objetivo ya fijados (`launcher.txt` / `target.txt`).
@@ -192,12 +199,18 @@ Solo para **descargar** los ficheros (el NSP y los dos `.nro`). Una vez copiados
 No. Para jugar hay que lanzar 07z **desde el icono del HOME** (el NSP). Desde el *Homebrew Menu* el frontend solo muestra un aviso: `fifa07.exe` solo se mapea en `0x400000`, y esa dirección baja queda libre **únicamente** al lanzarlo como *aplicación* con el NSP 07z (el Homebrew Menu lo lanza como *applet* de 64 bits, con esa dirección ocupada).
 
 **¿Necesito instalar algún kip o parche de Atmosphere?**
-No. Basta con tu **Atmosphere con sigpatches** de siempre (tanto da `sysMMC` como
-`emuMMC`). Esta versión de 07z **no** necesita kips, ni particiones nuevas, ni overclock,
-ni pasar por ningún asistente de setup.
+**Sí: el «parche de ventana baja»** — es obligatorio. Son dos ficheros
+(`atmosphere/mesosphere.bin` y `atmosphere/kips/autorun-loader.kip`) que van en el Release, en
+`parche-ventana-baja/`. FIFA 07 es un ejecutable con direcciones fijas (`0x400000`): sin ese
+parche el kernel no le da la ventana baja y el juego **no arranca** (pulsás Jugar y volvés al
+menú). Es para **Atmosphere 1.11.2 OFICIAL**; con un CFW empaquetado o modificado (packs
+«all-in-one», MOD…) el kernel parcheado **no encaja** y la consola se queda en **pantalla
+negra** — se quitan los dos ficheros y vuelve a arrancar. Guía:
+[`docs/PARCHE-VENTANA-BAJA.md`](docs/PARCHE-VENTANA-BAJA.md). No hace falta nada más: ni
+particiones nuevas, ni overclock, ni el asistente de setup de Wine-NX.
 
 **¿Qué pasa si no me arranca?**
-Casi siempre es una de estas tres cosas: la ruta del `.nro` no es exacta, falta algún dato del juego, o el runtime no está emparejado con su versión. Revisa la sección **Solución de problemas** justo aquí debajo y la guía [`docs/INSTALACION-07z.md`](docs/INSTALACION-07z.md).
+**Si el síntoma es «pulso Jugar y me devuelve al menú», casi seguro te falta el parche de ventana baja** (ver *Requisitos* y [`docs/PARCHE-VENTANA-BAJA.md`](docs/PARCHE-VENTANA-BAJA.md)). Si no es eso, casi siempre es una de estas tres cosas: la ruta del `.nro` no es exacta, falta algún dato del juego, o el runtime no está emparejado con su versión. Revisa la sección **Solución de problemas** justo aquí debajo y la guía [`docs/INSTALACION-07z.md`](docs/INSTALACION-07z.md).
 
 **¿Está relacionado con EA?**
 No. 07z es un proyecto **no oficial**, hecho por un aficionado, **sin ninguna relación, patrocinio ni respaldo** de EA.

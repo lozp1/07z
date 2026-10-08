@@ -5,7 +5,14 @@
 
 ## Qué necesitás
 
-- Una Switch con **Atmosphere y sigpatches** (da igual `sysMMC` o `emuMMC`).
+- Una Switch con **Atmosphere 1.11.2 OFICIAL** (revisión `5388824…`) y **sigpatches**
+  (da igual `sysMMC` o `emuMMC`). **Un CFW empaquetado/modificado (packs «all-in-one», MOD…)
+  no sirve**: el parche del punto siguiente no encaja y la consola queda en pantalla negra.
+- **El parche de «ventana baja» de Autorun** — **sin él el juego NO arranca** (síntoma:
+  pulsás Jugar y te devuelve al menú). Son dos ficheros que van en el Release, en
+  **`parche-ventana-baja/`**: `atmosphere/mesosphere.bin` y
+  `atmosphere/kips/autorun-loader.kip`. Cómo se instalan:
+  [docs/PARCHE-VENTANA-BAJA.md](PARCHE-VENTANA-BAJA.md).
 - **Tu copia de FIFA 07 de PC**, **instalada y funcional**. Para que sirva tiene que
   traer los datos completos:
 
@@ -24,7 +31,12 @@
 
 ## Instalación
 
-1. Copiá la carpeta **`fifa07`** a `sdmc:/switch/fifa07/`.
+1. **Primero el parche de «ventana baja»** (ver *Qué necesitás*): con la consola **apagada**,
+   copiá `atmosphere/mesosphere.bin` y `atmosphere/kips/autorun-loader.kip` a la SD y, si
+   arrancás con **Hekate**, añadí las dos líneas de `kernel=` / `kip1=` que explica
+   [docs/PARCHE-VENTANA-BAJA.md](PARCHE-VENTANA-BAJA.md).
+   *(Si ya tenías Autorun / Wine-NX instalado, ya lo tenés: saltá este paso.)*
+2. Copiá la carpeta **`fifa07`** a `sdmc:/switch/fifa07/`.
 2. Copiá **tu juego** dentro de `sdmc:/switch/fifa07/drive_c/FIFA 07/`, de modo que
    exista esta ruta:
 
@@ -42,8 +54,9 @@
 3. Instalá **`07z-forwarder.nsp`** con DBI, Goldleaf, Tinfoil o Awoo.
 4. En el **menú de inicio** aparece el icono **07z**. Pulsalo y después **Jugar**.
 
-**No hay que instalar kips, ni crear particiones, ni overclock, ni pasar por ningún**
-**asistente de configuración.**
+**No hay que crear particiones, ni hacer overclock, ni pasar por ningún asistente de**
+**configuración.** El único parche de kernel necesario es el de **«ventana baja»** (ver
+*Qué necesitás*): si ya usas Autorun / Wine-NX en tu consola, seguramente ya lo tengas.
 
 > **Importante**: para jugar lanzá 07z **desde el icono del HOME**. Desde el
 > *Homebrew Menu* no arranca el juego.
@@ -80,7 +93,7 @@ Vienen configurados. Se cambian desde la pantalla **Configuración** de 07z.
 | Síntoma | Qué hacer |
 |---|---|
 | El icono del HOME no abre 07z | Comprobá que existe `sdmc:/switch/fifa07/07z.nro` con ese nombre exacto |
-| **Pulso Jugar y me devuelve al menú** | (1) Lanzalo desde el **icono del HOME**. **Ni desde el Homebrew Menu ni desde tu instalador (DBI/Tinfoil/Goldleaf): desde ahí el título arranca en *modo applet*, sin memoria para el runtime, y vuelve al menú.** (2) **Cerrá cualquier juego abierto/en segundo plano y reiniciá la consola**: un juego suspendido deja el homebrew sin memoria y el runtime no arranca. (3) Comprobá que tu copia del paquete está **completa**: `wine-nx-runtime.nro` (43 MB) y `drive_c/windows/` además de `drive_c/FIFA 07/` |
+| **Pulso Jugar y me devuelve al menú** | **Causa nº1: te falta el parche de «ventana baja»** (Atmosphere 1.11.2 + `mesosphere.bin` + `autorun-loader.kip`): es *su* síntoma exacto → instalalo según [docs/PARCHE-VENTANA-BAJA.md](PARCHE-VENTANA-BAJA.md). Si ya lo tenés: (2) lanzalo desde el **icono del HOME** — **ni** Homebrew Menu **ni** instalador (en *modo applet* no hay memoria para el runtime). (3) **Cerrá cualquier juego abierto en segundo plano y reiniciá la consola**. (4) Comprobá que tu copia está **completa**: `wine-nx-runtime.nro` (43 MB) y `drive_c/windows/` además de `drive_c/FIFA 07/` |
 | Sale «Abre desde el menú de inicio» | Lo lanzaste desde el Homebrew Menu: usá el icono del HOME |
 | El juego no arranca | Comprobá que copiaste **todos** los datos del juego, no solo el `.exe` |
 | **Sale una ventana de Windows** (o pide **«install DirectX 9.0c»**) | Faltan los ficheros de 07z junto al `.exe`: **los pisaste** al copiar tu juego → volvé a copiar el paquete de **Releases** sin reemplazar la carpeta |
