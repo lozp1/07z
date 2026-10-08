@@ -15,6 +15,36 @@ backport and CPU-placement experiments.
 **Provide your own installed PES 2013 PC version 1.0.** The game executable,
 game data and installation code are not supplied by this repository.
 
+## 07z / FIFA 07
+
+> **Este fork añade, sobre FEXTendo/PES13-NX, el port de FIFA 07 para Nintendo
+> Switch: el proyecto `07z`.** El juego se lanza desde un **icono propio en el menú
+> de inicio** (NSP forwarder), con un **frontend hecho a medida** (Borealis) y el
+> runtime Wine-NX por debajo: **Wine no se ve nunca**, se siente como un juego nativo.
+
+- **Instalación (3 pasos)**: Atmosphere con sigpatches → copiar la carpeta
+  `sdmc:/switch/fifa07/` a la SD (con tu copia del juego dentro) → instalar el NSP
+  del forwarder. **Sin kips, sin particiones, sin overclock, sin asistente de setup.**
+- **Arranque**: desde el **icono del HOME**, nunca desde el Homebrew Menu.
+- **Resolución**: en *Mi FIFA 07 → Ajustes → Pantalla* elige **1280x720** (es el
+  único modo 16:9 nativo; el runtime no estira la imagen, así que cualquier otro
+  aspecto deja barras negras).
+- **Guía completa de instalación**: [`docs/INSTALACION-07z.md`](docs/INSTALACION-07z.md)
+  (se publica como `docs/INSTALACION.md` dentro del paquete 07z).
+- **Estado del port y notas técnicas**: [`docs/DISTRIBUCION.md`](docs/DISTRIBUCION.md),
+  [`docs/OPTIMIZACION.md`](docs/OPTIMIZACION.md),
+  [`docs/MANDOS-DIAGNOSTICO.md`](docs/MANDOS-DIAGNOSTICO.md),
+  [`docs/RUNTIME-RAIZ-POR-PORT.md`](docs/RUNTIME-RAIZ-POR-PORT.md).
+- **Frontend**: [`frontend-nx/`](frontend-nx/) (app `07z.nro`, Borealis).
+
+> FIFA 07 y sus marcas son propiedad de **EA**. Este proyecto es **no oficial** y no
+> incluye ni distribuye el juego.
+
+El resto de este README se conserva del proyecto original **FEXTendo / PES13-NX**
+(abajo).
+
+---
+
 ## Setup
 
 1. Download the `FEXTendo-<version>-sd.zip` from

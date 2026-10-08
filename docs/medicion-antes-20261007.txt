@@ -1,0 +1,94 @@
+==========================================================================
+MEDICION FIFA 07 (Wine-NX/Autorun)   SD=D:/   log=D:/switch/fifa07/logs/fifa07.log
+==========================================================================
+CONFIGURACION EFECTIVA (segun el propio log)
+  [SYNC]  Standard        (Standard=normal, Horizon=sincronizacion directa)
+  [CORES] graphics workers may use core 3 at priority 63
+  [CORES] 16 wined3d_cs: core 3, priority 63
+  [CORES] 20 wined3d_cs: core 3, priority 63
+  [CORES] 32 wined3d_cs: core 3, priority 63
+  [CORES] 44 dxvk-cs: core 3, priority 63
+  [CORES] 56 dxvk-cs: core 3, priority 63
+  [CORES] 60 dxvk-shader-l: affinity 0x7, priority unchanged
+  [CORES] 68 dxvk-shader-h: affinity 0x7, priority unchanged
+  [CORES] 64 dxvk-shader-h: affinity 0x7, priority unchanged
+  [INIT]  processors=3   (nucleos vistos por Wine)
+  dxvk.conf en uso: C:\users\steamuser\AppData\Local\Autorun\dxvk.conf
+  workers de compilacion: 3
+  cache DXVK cargada: C:\users\steamuser\AppData\Local\dxvk\33a216341833ba70.dxvk.bin
+
+--------------------------------------------------------------------------
+FPS POR TRAMO  (frames presentados / tiempo, lineas [PROGRESS])
+--------------------------------------------------------------------------
+  tramo(s)   frames     FPS  barra
+   5-  15s       14     1.4  #
+  15-  27s       25     2.1  ##
+  27-  37s      317    31.7  ###############################
+  37-  47s      313    31.3  ###############################
+  47-  57s      601    60.1  ############################################################
+  57-  67s      600    60.0  ############################################################
+  67-  77s      601    60.1  ############################################################
+  77-  87s      602    60.2  ############################################################
+  87-  97s      601    60.1  ############################################################
+  97- 107s      599    59.9  ###########################################################
+ 107- 117s      602    60.2  ############################################################
+ 117- 127s      410    41.0  #########################################
+ 127- 137s      304    30.4  ##############################
+ 137- 147s      230    23.0  #######################
+ 147- 157s      141    14.1  ##############
+ 157- 167s      141    14.1  ##############
+ 167- 177s      160    16.0  ################
+ 177- 187s       54     5.4  #####
+ 187- 197s       27     2.7  ##
+ 197- 207s      428    42.8  ##########################################
+ 207- 217s      518    51.8  ###################################################
+ 217- 227s      340    34.0  ##################################
+ 227- 237s      489    48.9  ################################################
+ 237- 247s      338    33.8  #################################
+ 247- 257s      402    40.2  ########################################
+ 257- 267s      354    35.4  ###################################
+ 267- 277s      179    17.9  #################
+ 277- 287s      463    46.3  ##############################################
+ 287- 297s      528    52.8  ####################################################
+ 297- 307s      396    39.6  #######################################
+ 307- 317s      487    48.7  ################################################
+ 317- 327s      361    36.1  ####################################
+ 327- 337s      533    53.3  #####################################################
+ 337- 347s      472    47.2  ###############################################
+
+RESUMEN DE FPS  (34 tramos utiles)
+  FPS medio (media de tramos) :   37.1
+  FPS medio global del run    :   36.9
+  FPS minimo (peor tramo)     :    1.4   <-- el 'bajon'
+  FPS maximo (mejor tramo)    :   60.2
+  percentiles p10 / p50 / p90 :    5.4 /   39.6 /   60.1
+
+  BAJONES (lo que hay que reducir):
+    tramos < 30 FPS : 9 de 34
+    tramos < 20 FPS : 8 de 34
+    tramos < 10 FPS : 4 de 34
+
+  ULTIMOS 5 VALORES: 39.6  48.7  36.1  53.3  47.2
+
+--------------------------------------------------------------------------
+CPU / NUCLEOS  ([THREADS]: 1.00 = un nucleo al 100%)
+--------------------------------------------------------------------------
+  ultima muestra: 40 hilos usan 1.00 nucleos
+  reparto: 4w@0 47.7% 56w:dxvk-cs@3 30.4% 52w:dxvk-queue@1 5.5% 108w@2 4.2% 48w:dxvk-submit@2 3.9% 0s@0 2.1% 104w:wine_dsound_mixer@2 1.9% 104s@2 0.7% 8s@1 0.5% 12w@2 0.5% 76s@0 0.5%
+  => el port NO esta saturado de CPU (sobra CPU); el techo no es de calculo.
+
+--------------------------------------------------------------------------
+CACHES DE SHADERS (deben EXISTIR; su fecha debe avanzar tras jugar)
+--------------------------------------------------------------------------
+  DXVK 33a216341833ba70.dxvk.bin   279307 B  mtime=2026-10-07T12:02:24
+  DXVK 33a216341833ba70.dxvk.lut     6231 B  mtime=2026-10-07T12:02:24
+  NVK(Mesa) D:/.mesa/mesa_shader_cache_sf : 40.7 MB
+
+COMO COMPARAR ANTES/DESPUES
+  1) Arranca el juego desde el icono del HOME y juega el MISMO tramo
+     (mismo partido + los MISMOS menus: seleccion de equipos, plantillas,
+     formaciones, que es donde caia a 1-10 FPS).
+  2) Sal del juego y ejecuta otra vez este script.
+  3) Compara: FPS minimo, 'tramos < 20 FPS' y 'tramos < 10 FPS'.
+  IMPORTANTE: el PRIMER arranque tras cambiar dxvk.conf va PEOR
+  (recompila shaders). Mide en el SEGUNDO arranque.
