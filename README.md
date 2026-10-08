@@ -1,118 +1,150 @@
-# FEXTendo / PES13-NX
+<h1 align="center">07z — FIFA 07 en Nintendo Switch</h1>
 
-FEXTendo is a Nintendo Switch launcher and compatibility **wrapper for the
-Windows PC version of PES 2013**. It uses Wine, FEX-Emu and DXVK to run the PC
-game; this repository contains the wrapper, integration code and build tools.
+<p align="center">
+  <b>Se instala como un juego. Se arranca desde el icono del HOME. Wine no se ve.</b><br/>
+  Proyecto no oficial, sin relación con EA. No incluye el juego.
+</p>
 
-The **Switch port and Horizon/Wine integration of FEX-Emu in FEXTendo** are
-developed by **AndroSwitch Project / Ibnuard**. The CPU translation engine is
-upstream **FEX-Emu**; the Wine/Horizon runtime foundation comes from
-**Wine-NX / Autorun**. See the [FEX port source and commit record](docs/FEX-PORT-PROVENANCE.md)
-for our implementation work and the components we reuse or adapt. Our initial
-FEX guest PASS on Switch predates the later, explicitly credited Autorun timer
-backport and CPU-placement experiments.
+**07z** es un frontend homebrew y el envoltorio que lo acompaña para **jugar a tu
+propia copia de FIFA 07 de PC en una Nintendo Switch con custom firmware**, y
+hacerlo **como si fuera un juego nativo de la consola**: aparece un **icono «07z»
+en el menú de inicio**, lo pulsas, sale **una interfaz hecha a medida** y al darle a
+**Jugar** entra el partido. **Wine no se muestra nunca**: ni catálogos, ni menús
+intermedios, ni ventanas. Al salir del partido vuelves directo al HOME.
 
-**Provide your own installed PES 2013 PC version 1.0.** The game executable,
-game data and installation code are not supplied by this repository.
-
-## 07z / FIFA 07
-
-> **Este fork añade, sobre FEXTendo/PES13-NX, el port de FIFA 07 para Nintendo
-> Switch: el proyecto `07z`.** El juego se lanza desde un **icono propio en el menú
-> de inicio** (NSP forwarder), con un **frontend hecho a medida** (Borealis) y el
-> runtime Wine-NX por debajo: **Wine no se ve nunca**, se siente como un juego nativo.
-
-- **Instalación (3 pasos)**: Atmosphere con sigpatches → copiar la carpeta
-  `sdmc:/switch/fifa07/` a la SD (con tu copia del juego dentro) → instalar el NSP
-  del forwarder. **Sin kips, sin particiones, sin overclock, sin asistente de setup.**
-- **Arranque**: desde el **icono del HOME**, nunca desde el Homebrew Menu.
-- **Resolución**: en *Mi FIFA 07 → Ajustes → Pantalla* elige **1280x720** (es el
-  único modo 16:9 nativo; el runtime no estira la imagen, así que cualquier otro
-  aspecto deja barras negras).
-- **Guía completa de instalación**: [`docs/INSTALACION-07z.md`](docs/INSTALACION-07z.md)
-  (se publica como `docs/INSTALACION.md` dentro del paquete 07z).
-- **Estado del port y notas técnicas**: [`docs/DISTRIBUCION.md`](docs/DISTRIBUCION.md),
-  [`docs/OPTIMIZACION.md`](docs/OPTIMIZACION.md),
-  [`docs/MANDOS-DIAGNOSTICO.md`](docs/MANDOS-DIAGNOSTICO.md),
-  [`docs/RUNTIME-RAIZ-POR-PORT.md`](docs/RUNTIME-RAIZ-POR-PORT.md).
-- **Frontend**: [`frontend-nx/`](frontend-nx/) (app `07z.nro`, Borealis).
-
-> FIFA 07 y sus marcas son propiedad de **EA**. Este proyecto es **no oficial** y no
-> incluye ni distribuye el juego.
-
-El resto de este README se conserva del proyecto original **FEXTendo / PES13-NX**
-(abajo).
+| | |
+|---|---|
+| **Página del proyecto** | https://lozp1.github.io/07z/ |
+| **Guía paso a paso** | [`docs/INSTALACION-07z.md`](docs/INSTALACION-07z.md) |
+| **Descargas (NSP + port)** | [Releases](https://github.com/lozp1/07z/releases) |
 
 ---
 
-## Setup
+## Aviso importante
 
-1. Download the `FEXTendo-<version>-sd.zip` from
-   [Releases](https://github.com/Ibnuard/pes13_nx/releases) and extract `switch/`
-   to your SD root. This complete package includes the NRO, NSP forwarder,
-   Wine/FEX/DXVK runtime, launcher assets, presets and default `settings.dat`.
-   The standalone NRO/NSP downloads are for existing installations.
-2. Copy your own game installation (`pes2013.exe`, accompanying game DLLs and
-   `img/`) into `switch/pes13-fex/drive_c/PES13/`.
-3. On the Windows PC where PES is installed, run
-   [tools/export-metadata.py](tools/export-metadata.py). Copy the resulting
-   `local/config/pes13-install.reg` to `switch/pes13-fex/pes13-install.reg`.
-4. Install and launch the included `FEXTendo-PES13.nsp`, targeting
-   `sdmc:/switch/pes13-fex/pes13-fex.nro` (32-bit address space, no alias, 4 cores,
-   svcDebug disabled). Its icon matches the NRO.
+> **07z es un proyecto NO oficial y SIN relación alguna con EA (Electronic Arts).**
+>
+> Este repositorio **NO incluye ni distribuye el juego FIFA 07** (ni `fifa07.exe`,
+> ni sus datos, ni ningún fichero con copyright de EA). **El juego es propiedad de
+> cada usuario**: tú aportas **tu propia copia** de FIFA 07 de PC.
+>
+> Aquí solo se distribuye **el frontend 07z**, el **NSP forwarder** que lo lanza
+> desde el menú de inicio, el **runtime** (software libre de terceros, ver
+> *Créditos*) y las **herramientas y documentación** del port. Nada de lo que hay
+> en este repositorio contiene material de EA.
+>
+> «FIFA» se usa únicamente de forma **descriptiva**, para indicar con qué juego de
+> PC es compatible.
 
-Expected layout at the SD root (runtime folders shown below come from the
-complete package; keep their other supplied files):
+---
 
-```text
-switch/pes13-fex/
-├── pes13-fex.nro
-├── configuration.ini
-├── pes13-install.reg                 # from your own Windows installation
-├── launcher/                        # FEXTendo artwork, fonts and presets
-├── drive_c/
-│   ├── PES13/
-│   │   ├── pes2013.exe               # your PC game, version 1.0
-│   │   ├── img/                     # your game data
-│   │   ├── ...                      # the rest of your installed game files
-│   │   ├── d3d9.dll                 # package-supplied DXVK
-│   │   ├── dxvk.conf
-│   │   └── pes2013.wine-nx.txt
-│   ├── KONAMI/Pro Evolution Soccer 2013/settings.dat
-│   ├── dxvk/d3d9.dll
-│   └── windows/                     # package-supplied Wine/FEX modules
-└── share/wine/                      # runtime fonts and NLS data
-```
+## Requisitos
 
-Keep the package's runtime DLLs and configuration when adding game files.
-The launcher manages the canonical `drive_c/KONAMI/Pro Evolution Soccer
-2013/settings.dat` and its compatibility copies. Keep installation metadata
-private. Close the game before replacing runtime files.
+| # | Necesitas | Detalle |
+|---|---|---|
+| 1 | **Nintendo Switch con custom firmware** | Atmosphere **con sigpatches** (vale `sysMMC` o `emuMMC`) |
+| 2 | **Tu propia copia de FIFA 07 de PC** | `fifa07.exe` + sus datos. **No se incluye** |
+| 3 | **Tarjeta SD con espacio** | ~60 MB del port **+** lo que ocupe tu copia del juego (2-4 GB) |
+| 4 | **Un instalador de NSP** en la consola | DBI, Goldleaf, Tinfoil, Awoo Installer… |
 
-Game-data and save directories are preserved in the release ZIP even when
-empty. Only PRs merged into `main` run the package/release workflow. Each merge
-publishes a versioned tag, release and generated changelog
-(for example, `PES13 FEXTendo V.0.3.7`, with a revision for automatic packages).
-See [release CI and runtime updates](docs/RELEASE-CI.md) for the approved
-production input, checks and instructions for updating the runtime binaries.
+**Lo que NO hace falta**: ni particiones nuevas, ni **kips**, ni overclock, ni pasar
+por ningún asistente de setup. Basta con tu Atmosphere + sigpatches de siempre.
 
-The release runtime includes two controllers, horizontal Joy-Con mapping and
-live keyboard editing with English labels and controller sprites. It retains
-the production-v1 startup fix, silent runtime and pre-DFE FEX DLL.
+---
 
-## Credits
+## Instalación
 
-- **FEXTendo / AndroSwitch Project:** the FEX-Emu port to Nintendo Switch,
-  including our Horizon/Wine adapter, JIT memory bridge and exception handling;
-  the original native launcher and PES-specific integration.
-- **[Autorun (formerly Wine-NX)](https://github.com/autorunhq/autorun), danfromtico
-  and contributors:** the Wine/Horizon runtime foundation, engineering
-  references and explicitly attributed runtime backports.
-- **[FEX-Emu](https://github.com/FEX-Emu/FEX) and its contributors:** the upstream
-  CPU translation engine used by our integration. Wine, DXVK, Mesa/mesa-switch,
-  libnx and the other dependencies retain their original authorship.
+1. **Copia el port**: deja la carpeta `fifa07` en `sdmc:/switch/fifa07/`.
+   Deben quedar, entre otros, `wine-nx-runtime.nro` y `07z.nro` en esa ruta.
+2. **Pon tu juego**: copia tu FIFA 07 (PC) dentro de
+   `sdmc:/switch/fifa07/drive_c/FIFA 07/`, de forma que exista
+   `sdmc:/switch/fifa07/drive_c/FIFA 07/fifa07.exe`.
+3. **Instala el NSP** `07z-forwarder.nsp` con DBI / Goldleaf / Tinfoil / Awoo.
+4. En el **HOME** aparece el icono **07z**. Púlsalo y luego **Jugar**.
+5. **Una sola vez**, dentro del juego: **Mi FIFA 07 → Ajustes → Pantalla → 1280x720**.
 
-See [THIRD_PARTY.md](THIRD_PARTY.md) for component origins, source revisions
-and licenses. Project code uses
-[LGPL-2.1-or-later](LICENSE); the new FEX adapter uses [MIT](src/fex/LICENSE).
-Unofficial project; not affiliated with Konami or Nintendo.
+> **Regla de oro**: para jugar, lanza 07z **desde el icono del HOME (el NSP)**.
+> Desde el **Homebrew Menu** no es posible: ahí se lanza como *applet* de 64 bits y
+> `fifa07.exe` no puede mapearse en su base fija («address space unavailable»).
+
+---
+
+## Pantalla: elige 1280x720 (una vez)
+
+El runtime **no estira** la imagen: la escala con `min()` y la centra, así que con un
+aspecto que no sea 16:9 aparecen **barras negras**. FIFA 07 tiene **un solo modo 16:9
+nativo: `1280x720`**, y se elige **una vez** en el propio juego:
+
+> **Mi FIFA 07 → Ajustes → Pantalla → 1280x720**
+
+**No** elijas `1280x1024` (es 5:4 y deja barras a los lados). El juego lo guarda solo
+en su perfil; no hay que editar nada a mano.
+
+---
+
+## Controles
+
+Los controles vienen **preconfigurados** y se editan desde la pantalla
+**Configuración** de 07z.
+
+| Botón Switch | En menús | En partido |
+|---|---|---|
+| **A** | Confirmar | Pase |
+| **B** | — (usa **PLUS** para atrás) | Tiro / entrada |
+| **X** | — | Pase filtrado / salida del portero |
+| **Y** | — | Centro / pase largo |
+| **R** | — | Sprint |
+| **L** | — | Regate / skill move |
+| **ZR** | Avanzar en las pantallas que lo pidan | — |
+| **ZL** | — | Pase (igual que **A**) |
+| **PLUS** | Atrás | Pausa |
+| **MINUS** | Confirmar | — |
+| **Cruceta / Stick izq.** | Navegar | Mover jugador |
+| **Clic stick izq.** | — | Amago (dummy) |
+| **Clic stick der.** | — | Control de ritmo |
+
+> Las tácticas (**Q**) y el **teclado numérico** no se mapean a propósito: el teclado
+> numérico comparte códigos con las flechas y disparaba las tácticas solas.
+
+---
+
+## Rendimiento
+
+- **55-60 FPS** en partido con gráficos y resolución en **ALTO**.
+- Los **bajones de los menús 3D** (selección de equipos, plantillas) no eran de CPU ni
+  de GPU: eran **compilación de shaders** y **I/O de la tarjeta**. El **segundo arranque**
+  de un menú ya va fluido (la caché de shaders se guarda en la SD).
+- El port ya trae los ajustes puestos (`sync`, `frame-limit`, `dxvk.conf`): no hay que
+  tocar nada. El **overclock es opcional** (p. ej. con UltraHand).
+
+---
+
+## Estructura del repositorio
+
+| Carpeta | Qué es |
+|---|---|
+| [`frontend-nx/`](frontend-nx/) | El frontend **07z** (app `07z.nro`, framework Borealis) |
+| [`src/shims/`](src/shims/) | Shims de compatibilidad para FIFA 07 (DINPUT, DirectMusic, DPNHPAST, SensApi, MSIMG32) |
+| [`docs/`](docs/) | Guía de instalación, distribución, diagnóstico de mandos, optimización, resolución |
+| [`patches/`](patches/) | Parches aplicados al runtime Wine-NX |
+| [`tools/`](tools/) | Scripts del forwarder, verificación, medición de FPS y empaquetado |
+
+---
+
+## Créditos y licencia
+
+- **07z** (frontend, port y documentación): **Franco López (`lozp1`)** — [MIT](LICENSE).
+- **Runtime**: **Wine** y **[Wine-NX / Autorun](https://github.com/autorunhq/autorun)** —
+  **LGPL-2.1-or-later**. Los parches aplicados están en [`patches/`](patches/).
+- **[Borealis](https://github.com/XITRIX/borealis)** (interfaz), **[libnx /
+  devkitPro](https://devkitpro.org/)** (toolchain), **[FEX-Emu](https://github.com/FEX-Emu/FEX)**
+  (traducción x86→ARM).
+- Este repositorio es un **fork de [FEXTendo / PES13-NX](https://github.com/Ibnuard/pes13_nx)**
+  (AndroSwitch Project / Ibnuard). El README original del wrapper se conserva en
+  [`README-UPSTREAM.md`](README-UPSTREAM.md).
+
+**FIFA 07 y sus marcas son propiedad de EA (Electronic Arts).** Este proyecto es
+**no oficial**: no está afiliado, patrocinado ni respaldado por EA. «FIFA» se usa
+únicamente de forma descriptiva.
+
+Contacto: [francopaolo_lg@outlook.com](mailto:francopaolo_lg@outlook.com)
