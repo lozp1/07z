@@ -1,0 +1,8 @@
+; msimg32.dll shim exports.
+; dxwrapper.dll imports exactly these three; see msimg32_fifa07.c for why the
+; module is stubbed rather than taken from the host's C:\Windows\SysWOW64.
+LIBRARY msimg32.dll
+EXPORTS
+    AlphaBlend
+    GradientFill
+    TransparentBlt

@@ -1,0 +1,7 @@
+; dmusic.dll shim exports.
+; The in-process COM server surface, and nothing else: FIFA 07 only creates
+; CLSID_DirectMusic through CoCreateInstance. See dmusic_fifa07.c.
+LIBRARY dmusic.dll
+EXPORTS
+    DllGetClassObject
+    DllCanUnloadNow
