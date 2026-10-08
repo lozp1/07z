@@ -19,7 +19,7 @@ Sin el parche: el exe no se puede mapear → el runtime no arranca → **vuelta 
 
 | Requisito | Valor |
 |---|---|
-| **Atmosphere** | **1.11.2**, revisión `5388824be146a89619e8d641acd64599cf1c5f62`. **El parche es un kernel: va por versión exacta de Atmosphere y de firmware.** Si tu consola está en otra versión (AMS distinto, firmware más nuevo) puede **no encajar** → pantalla negra (ver aviso de abajo) |
+| **Atmosphere** | **1.11.2**, revisión `5388824be146a89619e8d641acd64599cf1c5f62`. **El parche es un kernel: va por versión exacta de Atmosphere y de firmware.** Si tu consola está en otra versión (AMS distinto, firmware más nuevo) puede **no encajar** → pantalla negra (ver aviso de abajo). **AMS 1.11.2 llega hasta firmware 22.5.0**: el firmware **23.0.x** todavía no está soportado por Atmosphere, así que ahí **no hay parche posible** (ni este ni otro) hasta que salga la versión que lo soporte |
 | `atmosphere/mesosphere.bin` | 675.840 bytes · md5 `2e1d04d6ea1a…` |
 | `atmosphere/kips/autorun-loader.kip` | 158.432 bytes · md5 `d6cdc924bf7b…` |
 

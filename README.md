@@ -73,7 +73,7 @@ Hay cosas que estamos probando y que **todavía no podemos prometer**. Las dejam
 
 | # | Necesitas | Detalle |
 |---|-----------|---------|
-| 1 | **Nintendo Switch** con **custom firmware** | Atmosphere **1.11.2 OFICIAL** (revisión `5388824…`) con sigpatches — vale `sysMMC` o `emuMMC`. **El parche de ventana baja es un kernel: va por versión exacta de Atmosphere Y de firmware** (ver nota de abajo) |
+| 1 | **Nintendo Switch** con **custom firmware** | Atmosphere **1.11.2 OFICIAL** (revisión `5388824…`) con sigpatches — vale `sysMMC` o `emuMMC`. **El parche de ventana baja es un kernel: va por versión exacta de Atmosphere Y de firmware** (ver nota de abajo). **AMS 1.11.2 soporta firmware hasta 22.5.0**: en **23.0.x** el CFW oficial todavía no va — este port tampoco |
 | 2 | **Tu propia copia de FIFA 07 de PC** | `fifa07.exe` + sus datos. **No se incluye** |
 | 3 | **Tarjeta SD** con espacio | ~60 MB del port **+** lo que ocupe tu copia del juego (2-4 GB) |
 | 4 | **Un instalador de NSP** en la consola | DBI, Goldleaf, Tinfoil, Awoo Installer… |
