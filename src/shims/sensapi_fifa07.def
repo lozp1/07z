@@ -1,0 +1,8 @@
+; SensApi.dll shim exports.
+; fifa07.exe imports exactly IsNetworkAlive; the other two are the documented
+; SensApi surface and are provided so a GetProcAddress lookup does not crash.
+LIBRARY SensApi.dll
+EXPORTS
+    IsNetworkAlive
+    IsDestinationReachableA
+    IsDestinationReachableW

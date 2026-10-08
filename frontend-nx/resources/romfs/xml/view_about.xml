@@ -1,0 +1,223 @@
+<brls:Box
+    width="100%"
+    height="100%"
+    axis="column"
+    paddingTop="20px"
+    paddingLeft="35px"
+    paddingRight="35px"
+    paddingBottom="15px"
+    backgroundColor="@theme/brls/background">
+
+    <!-- Encabezado estilo Switch Horizon OS con barra elegante -->
+    <brls:Box
+        width="100%"
+        height="auto"
+        axis="column"
+        marginBottom="16px">
+        <brls:Label
+            text="@i18n/hints/about_title"
+            fontSize="24px"
+            textColor="@theme/brls/text"
+            marginBottom="12px" />
+        <brls:Box
+            width="100%"
+            height="1px"
+            backgroundColor="@theme/brls/sidebar/separator" />
+    </brls:Box>
+
+    <brls:ScrollingFrame
+        width="auto"
+        height="560px">
+        <brls:Box
+            width="auto"
+            height="auto"
+            axis="row"
+            justifyContent="spaceBetween"
+            paddingBottom="30px">
+
+            <!-- Columna Izquierda: PROTAGONISTA = la informacion del autor del port.
+                 Los creditos a terceros y el aviso legal son SECUNDARIOS (abajo,
+                 mas pequenos y con color atenuado). -->
+            <brls:Box
+                width="640px"
+                height="auto"
+                axis="column"
+                padding="24px"
+                cornerRadius="8px"
+                backgroundColor="@theme/brls/menu/row"
+                marginRight="20px">
+
+                <brls:Box
+                    width="auto"
+                    height="auto"
+                    axis="row"
+                    alignItems="center"
+                    marginBottom="18px">
+                    <brls:Image
+                        image="@res/img/07z_logo.png"
+                        width="80px"
+                        height="80px"
+                        cornerRadius="16px"
+                        marginRight="18px" />
+                    <brls:Box
+                        width="auto"
+                        height="auto"
+                        axis="column">
+                        <brls:Label
+                            text="07z"
+                            fontSize="26px"
+                            textColor="#00E6A8" />
+                        <brls:Label
+                            text="@i18n/hints/about_version"
+                            fontSize="14px"
+                            textColor="@theme/brls/text_disabled"
+                            marginTop="4px" />
+                    </brls:Box>
+                </brls:Box>
+
+                <brls:Box
+                    width="100%"
+                    height="1px"
+                    backgroundColor="@theme/brls/sidebar/separator"
+                    marginBottom="16px" />
+
+                <!-- ===== PROTAGONISTA: informacion del autor (el mayor tamano, acento) ===== -->
+                <brls:Label
+                    text="@i18n/hints/about_developer"
+                    fontSize="30px"
+                    textColor="#00E6A8"
+                    marginBottom="12px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_email"
+                    fontSize="17px"
+                    textColor="@theme/brls/accent"
+                    marginBottom="5px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_paypal"
+                    fontSize="17px"
+                    textColor="@theme/brls/accent"
+                    marginBottom="5px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_repo"
+                    fontSize="17px"
+                    textColor="@theme/brls/accent"
+                    marginBottom="16px" />
+
+                <brls:Box
+                    width="100%"
+                    height="1px"
+                    backgroundColor="@theme/brls/sidebar/separator"
+                    marginBottom="14px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_desc"
+                    fontSize="14px"
+                    textColor="@theme/brls/text"
+                    marginBottom="16px" />
+
+                <!-- ===== SECUNDARIO: creditos a software libre de terceros ===== -->
+                <brls:Label
+                    text="@i18n/hints/about_credits_title"
+                    fontSize="14px"
+                    textColor="@theme/brls/text_disabled"
+                    marginBottom="8px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_credits_runtime"
+                    fontSize="12px"
+                    textColor="@theme/brls/text_disabled"
+                    marginBottom="4px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_credits_framework"
+                    fontSize="12px"
+                    textColor="@theme/brls/text_disabled"
+                    marginBottom="4px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_credits_devkitpro"
+                    fontSize="12px"
+                    textColor="@theme/brls/text_disabled"
+                    marginBottom="4px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_credits_fextendo"
+                    fontSize="12px"
+                    textColor="@theme/brls/text_disabled"
+                    marginBottom="4px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_credits_thanks"
+                    fontSize="12px"
+                    textColor="@theme/brls/text_disabled"
+                    marginBottom="10px" />
+
+                <!-- Nota legal (secundaria): port no oficial -->
+                <brls:Label
+                    text="@i18n/hints/about_credits_legal"
+                    fontSize="12px"
+                    textColor="@theme/brls/text_disabled" />
+
+            </brls:Box>
+
+            <!-- Divisor vertical -->
+            <brls:Box
+                width="1px"
+                height="440px"
+                backgroundColor="@theme/brls/sidebar/separator"
+                marginRight="20px" />
+
+            <!-- Columna Derecha: Donaciones y Apoyo (UN unico codigo QR: PayPal).
+                 Fondo translucido como el resto de la pantalla. -->
+            <brls:Box
+                width="460px"
+                height="auto"
+                axis="column"
+                alignItems="center"
+                padding="24px"
+                cornerRadius="8px"
+                backgroundColor="@theme/brls/menu/row">
+
+                <brls:Label
+                    text="@i18n/hints/about_support"
+                    fontSize="20px"
+                    textColor="@theme/brls/text"
+                    marginBottom="6px" />
+
+                <!-- Enlace en texto: lo rellena el codigo desde PAYPAL_URL,
+                     asi cambiar de enlace es tocar una sola constante. -->
+                <brls:Label
+                    id="lblDonateUrl"
+                    text="paypal.me/francopaololg"
+                    fontSize="15px"
+                    textColor="#00E6A8"
+                    marginBottom="14px" />
+
+                <!-- Contenedor QR de donaciones (rellenado por AboutActivity).
+                     Cuadrado y BLANCO: el QrCodeView pinta aqui el QR con su
+                     quiet zone, para que el movil lo detecte. -->
+                <brls:Box
+                    id="boxCoffeeQr"
+                    width="360px"
+                    height="360px"
+                    cornerRadius="12px"
+                    justifyContent="center"
+                    alignItems="center"
+                    backgroundColor="#FFFFFF"
+                    marginBottom="14px" />
+
+                <brls:Label
+                    text="@i18n/hints/about_scan_qr"
+                    fontSize="13px"
+                    textColor="@theme/brls/text_disabled"
+                    width="340px" />
+
+            </brls:Box>
+
+        </brls:Box>
+    </brls:ScrollingFrame>
+
+</brls:Box>
