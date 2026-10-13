@@ -26,44 +26,27 @@ Usas **tu propia copia** de FIFA 07 de PC; 07z pone todo lo demás (frontend, in
 > ⚠️ Proyecto **personal y no oficial**, sin relación con EA. **Aquí no se distribuye el juego**:
 > solo el envoltorio. «FIFA» se usa de forma descriptiva para indicar con qué juego es compatible.
 
-<!-- CAPTURAS: cuando esten las imagenes, subirlas a docs/img/ y descomentar esto:
-| ![Menú de 07z](docs/img/menu.png) | ![Partido](docs/img/juego.png) |
-|---|---|
-| El menú de 07z | El partido, con el HUD táctil |
--->
+| ![Menú de 07z](docs/img/menu.jpg) | ![Un partido](docs/img/juego.jpg) | ![Configuración de mandos](docs/img/configuracion.jpg) |
+|---|---|---|
+| El menú de 07z | Un partido | Los mandos, desde la consola |
 
 <hr/>
 
-## 📥 ¿Qué descargo? (mira tu firmware primero)
+## 📥 Descargar
 
-`Ajustes` → `Sistema` → `Versión de la consola`
-
-| Tu firmware | Descarga |
-|---|---|
-| **22.5** (Atmosphere 1.11.2) | **1 + 2 + 3** |
-| **23.0** (Atmosphere 1.12.0) | **1 + 2 + 4** |
-| Otro | No es tu parche: actualiza a uno de esos dos y escríbeme |
-
-**[⬇️ Descargar la última versión (Releases)](../../releases/latest)**
-
-| Nº | Fichero | Qué es |
-|---|---|---|
-| **1** | 07z base + interfaz | La carpeta `switch/` con el port entero |
-| **2** | 07z instalador | El `.nsp` que pone el icono en el menú HOME |
-| **3** | Parche para firmware **22.5** | Parche de **sistema**: obligatorio |
-| **4** | Parche para firmware **23.0** | Ídem, para Atmosphere 1.12.0 |
-| **5** | Runtime con soporte TÁCTIL | Opcional: controles táctiles (1 jugador) |
-
----
+**[⬇️ 07z-completo.zip](../../releases/latest)** — **un solo paquete con TODO dentro**:
+el port, el instalador, los dos parches y el runtime con **táctil** ya incluido.
 
 ## 🔧 Instalar (3 pasos)
 
-**1.** Copia la **carpeta `switch/`** del fichero **1** a la raíz de tu SD.
+**1.** Copia la carpeta **`switch/`** a la raíz de tu SD.
 
-**2.** Copia el parche **de TU firmware** (fichero **3** o **4**) a la raíz de la SD, respetando
-sus carpetas (`atmosphere/…`). _¿Lo olvidas? Pulsas Jugar y vuelves al menú: es exactamente eso._
+**2.** Copia la carpeta del parche que corresponda a **TU firmware** a la raíz de la SD:
+`parche-de-tu-firmware/firmware-22.5/` si tienes el 22.5, o `firmware-23.0/` si tienes el 23.0
+(lo ves en `Ajustes` → `Sistema` → `Versión`). Respeta lo que trae dentro (`atmosphere/…`).
+_¿Lo olvidas? Pulsas Jugar y vuelves al menú: es exactamente eso._
 
-**3.** Instala el `.nsp` (fichero **2**) con tu instalador de siempre (Sphaira, DBI, Goldleaf…).
+**3.** Instala **`07z-instalador.nsp`** con tu instalador de siempre (Sphaira, DBI, Goldleaf…).
 
 Y **tu juego** va aquí:
 
@@ -130,11 +113,10 @@ firmware, tu SD y qué pasa exactamente. Ayuda muchísimo.
 
 <hr/>
 
-## 🎮 Mod táctil (opcional)
+## 🎮 Controles táctiles
 
-El fichero **5** es un runtime extra con **soporte táctil** (1 jugador): reemplaza
-`switch/fifa07/wine-nx-runtime.nro` por él y podrás jugar tocando la pantalla.
-Los **dos jugadores** no forman parte de este paquete.
+El paquete ya trae el **runtime con soporte táctil** (1 jugador): además del mando, puedes
+jugar tocando la pantalla. Los **dos jugadores** no forman parte de este paquete.
 
 <hr/>
 
