@@ -34,8 +34,13 @@ Usas **tu propia copia** de FIFA 07 de PC; 07z pone todo lo demás (frontend, in
 
 ## 📥 Descargar
 
-**[⬇️ 07z-completo.zip](../../releases/latest)** — **un solo paquete con TODO dentro**:
-el port, el instalador, los dos parches y el runtime con **táctil** ya incluido.
+**[⬇️ Releases](../../releases/latest)** — necesitas **3 ficheros**:
+
+- **`07z-base-interfaz.zip`** → copia su carpeta `switch/`
+- **`parche-firmware-22.5.zip`** o **`parche-firmware-23.0.zip`** → **el de TU firmware**
+- **`07z-instalador.nsp`** → el que se instala
+
+_(¿Prefieres un solo archivo? `07z-completo.zip` los trae todos dentro.)_
 
 ## 🔧 Instalar (3 pasos)
 
