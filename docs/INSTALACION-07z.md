@@ -5,19 +5,17 @@
 
 ## Qué necesitás
 
-- Una Switch con **Atmosphere 1.11.2 OFICIAL** (revisión `5388824…`) y **sigpatches**
-  (da igual `sysMMC` o `emuMMC`). **AMS 1.11.2 soporta firmware hasta 22.5.0**: en
-  firmware **23.0.x** el CFW oficial todavía no va, así que este port **tampoco** puede
-  funcionar ahí (no hay parche posible hasta que Atmosphere lo soporte).
-- **El parche del punto siguiente es un kernel: va por
-  versión exacta de Atmosphere Y de firmware.** Si tu consola está en otra versión, puede
-  no encajar (pantalla negra al añadirlo) — en ese caso quita los dos ficheros y avisa para
-  reconstruirlo para tu versión.
-- **El parche de «ventana baja» de Autorun** — **sin él el juego NO arranca** (síntoma:
-  pulsás Jugar y te devuelve al menú). Vienen en el **ZIP completo del Release**
-  (`1-07z-PAQUETE-COMPLETO.zip`, con la carpeta `atmosphere/` ya puesta) o sueltos en
-  `2-07z-PARCHE-VENTANA-BAJA.zip`: `atmosphere/mesosphere.bin` y
-  `atmosphere/kips/autorun-loader.kip`. Cómo se instalan:
+- Una Switch con **Atmosphere** y **sigpatches** (da igual `sysMMC` o `emuMMC`). El port
+  soporta **dos** versiones de Atmosphere: **1.11.2** (firmware hasta 22.5.0) y
+  **1.12.0** (firmware 23.0.x). Mirá la tuya en **Ajustes → Sistema**: sale algo como
+  `23.0.1 | AMS 1.12.0 | S`.
+- **El parche de «ventana baja»** — **sin él el juego NO arranca** (síntoma: pulsás Jugar y
+  te devuelve al menú). **Es un kernel: va por versión exacta de Atmosphere.** Elegí el tuyo:
+  · **AMS 1.11.2** → `2-07z-PARCHE-VENTANA-BAJA.zip`
+  · **AMS 1.12.0** → `4-07z-PARCHE-VENTANA-BAJA-AMS-1.12.0.zip`
+
+  Los dos vienen también (con todo lo demás ya colocado) en el **ZIP completo**:
+  `1-07z-PAQUETE-COMPLETO.zip`. Cómo se instalan:
   [docs/PARCHE-VENTANA-BAJA.md](PARCHE-VENTANA-BAJA.md).
 - **Tu copia de FIFA 07 de PC**, **instalada y funcional**. Para que sirva tiene que
   traer los datos completos:

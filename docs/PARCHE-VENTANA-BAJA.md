@@ -17,18 +17,23 @@ Sin el parche: el exe no se puede mapear → el runtime no arranca → **vuelta 
 
 ## Qué necesitas
 
-| Requisito | Valor |
-|---|---|
-| **Atmosphere** | **1.11.2**, revisión `5388824be146a89619e8d641acd64599cf1c5f62`. **El parche es un kernel: va por versión exacta de Atmosphere y de firmware.** Si tu consola está en otra versión (AMS distinto, firmware más nuevo) puede **no encajar** → pantalla negra (ver aviso de abajo) |
-| `atmosphere/mesosphere.bin` | 675.840 bytes · md5 `2e1d04d6ea1a…` |
-| `atmosphere/kips/autorun-loader.kip` | 158.432 bytes · md5 `d6cdc924bf7b…` |
+**El parche es un kernel: va por versión exacta de Atmosphere.** Elegí el tuyo (miralo en
+**Ajustes → Sistema**, donde sale por ejemplo `23.0.1 | AMS 1.12.0 | S`):
+
+| Tu Atmosphere | Firmware | Descarga | `mesosphere.bin` | `autorun-loader.kip` |
+|---|---|---|---|---|
+| **AMS 1.11.2** (rev. `5388824b…`) | hasta 22.5.0 | `2-07z-PARCHE-VENTANA-BAJA.zip` | 675.840 B · md5 `2e1d04d6ea1a…` | 158.432 B · md5 `d6cdc924bf7b…` |
+| **AMS 1.12.0** (tag `28d6a2e1…`) | 23.0.x | `4-07z-PARCHE-VENTANA-BAJA-AMS-1.12.0.zip` | 684.032 B · sha256 `fc1bd5665aec6618…` | 190.636 B · sha256 `22e60b857d457c65…` |
+
+> ¿Otro AMS? Preguntá: el parche se reconstruye para esa versión exacta.
+> Un `mesosphere.bin` de **otra** versión deja la consola en **pantalla negra** al encender.
 
 > **Si al arrancar te queda la pantalla negra** (y solo ves Hekate/imagen al inicio):
 > el parche no encaja con tu versión. **Apaga, borra solo los dos ficheros que
 > acabas de copiar y arranca normal** — vuelve todo a como estaba. Si quieres el parche
 > para tu versión, avisa: se reconstruye para esas versiones exactas.
 
-Los dos ficheros están en el Release de 07z, en `parche-ventana-baja/` (`README.txt` y
+Los dos ficheros van en el **ZIP completo** del Release (`1-07z-PAQUETE-COMPLETO.zip`), o sueltos en `2-07z-PARCHE-VENTANA-BAJA.zip` (`README.txt` y
 `LICENSE.Atmosphere.txt` incluidos).
 
 ## Instalación
